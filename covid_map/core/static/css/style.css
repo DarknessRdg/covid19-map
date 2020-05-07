@@ -1,0 +1,158 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: "Jost", sans-serif;
+}
+
+.container-centralizado {
+  margin: 0 auto;
+  max-width: 1080px;
+  width: 90%;
+}
+
+.cabecalho {
+  background-color: #212121;
+  color: #fff;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.conteudo-cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button {
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  background-color: #212121;
+  color: #fff;
+  font-size: 18px;
+  font-family: "Jost", sans-serif;
+  cursor: pointer;
+}
+
+.cabecalho .conteudo-cabecalho nav {
+  height: 100%;
+}
+
+.cabecalho .conteudo-cabecalho nav ul {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.grupo-aba {
+  height: 100%;
+  margin: 0 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#aba-brasil {
+  padding-top: 30px;
+}
+
+#aba-brasil:hover {
+  color: #fafafabb;
+}
+
+#aba-piaui {
+  padding-top: 30px;
+}
+
+#aba-piaui:hover {
+  color: #fafafabb;
+}
+
+#barra-piaui {
+  display: none;
+}
+
+#barra-brasil {
+  display: block;
+}
+
+.verde {
+  background-color: #009688;
+}
+
+.vermelho {
+  background-color: #f44336;
+}
+
+.roxo {
+  background-color: #673ab7;
+}
+
+.barra-aba {
+  height: 8px;
+  border-radius: 2px;
+}
+
+.card {
+  min-width: 400px;
+  min-height: 600px;
+  margin-top: 30px;
+}
+
+.card-cabecalho {
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+}
+
+.card-titulo {
+  margin-left: 20px;
+}
+
+.card-corpo {
+  height: 500px;
+}
+
+.card-rodape {
+  padding: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  color: #616161;
+}
+
+.cor-mapa-brasil {
+  background-color: #66bb6a;
+}
+
+.cor-mapa-piaui {
+  background-color: #ffeb3b;
+}
+
+.container-cards-dados {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.card-dados {
+  min-width: 150px;
+  border: 1px solid #dbe9f5;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 8px;
+}

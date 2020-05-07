@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    
+<header class="cabecalho" id="topo">
+  <div class="container-centralizado conteudo-cabecalho">
+    <h2>Projeto COVID-19</h2>
+    <nav>
+      <ul>
+        <div class="grupo-aba">
+          <button id="aba-brasil">Brasil</button>
+          <div id="barra-brasil" class="barra-aba verde"></div>
+        </div>
+        <div class="grupo-aba">
+          <button id="aba-piaui">Piauí</button>
+          <div id="barra-piaui" class="barra-aba verde"></div>
+        </div>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="container-centralizado container-cards-dados">
+  <article class="card-dados" componente-brasil>
+    <h4>Casos Confirmados</h4>
+    <h2 style="color: #009688;">536000</h2>
+    <div class="barra-aba verde"></div>
+  </article>
+
+  <article class="card-dados" componente-brasil>
+    <h4>Óbitos</h4>
+    <h2 style="color: #f44336;">8536</h2>
+    <div class="barra-aba vermelho"></div>
+  </article>
+
+  <article class="card-dados" style="display: none;" componente-piaui>
+    <h4>Casos Confirmados</h4>
+    <h2 style="color: #009688;">1200</h2>
+    <div class="barra-aba verde"></div>
+  </article>
+
+  <article class="card-dados" style="display: none;" componente-piaui>
+    <h4>Ocupação de leitos</h4>
+    <h2 style="color: #673ab7;">56%</h2>
+    <div class="barra-aba roxo"></div>
+  </article>
+
+  <article class="card-dados" style="display: none;" componente-piaui>
+    <h4>Óbitos</h4>
+    <h2 style="color: #f44336;">45</h2>
+    <div class="barra-aba vermelho"></div>
+  </article>
+</section>
+
+<main class="container-centralizado">
+  <article class="card" componente-brasil>
+    <header class="card-cabecalho">
+      <h3 class="card-titulo">Mapa</h3>
+    </header>
+    <div class="card-corpo cor-mapa-brasil"></div>
+    <footer class="card-rodape">
+      <p class="card-texto-rodape">
+        Fonte: Secretarias Estaduais de Saúde. Brasil, 2020
+      </p>
+    </footer>
+  </article>
+
+  <article class="card" style="display: none;" componente-piaui>
+    <header class="card-cabecalho">
+      <h3 class="card-titulo">Mapa</h3>
+    </header>
+    <div class="card-corpo cor-mapa-piaui"></div>
+    <footer class="card-rodape">
+      <p class="card-texto-rodape">
+        Fonte: Secretarias Estaduais de Saúde. Brasil, 2020
+      </p>
+    </footer>
+  </article>
+</main>
+
+<section class="container-centralizado">
+  <article class="card grafico" componente-brasil>
+    <header class="card-cabecalho">
+      <h3 class="card-titulo">Casos Confirmados</h3>
+    </header>
+    <div class="card-corpo verde"></div>
+    <footer class="card-rodape">
+      <p class="card-texto-rodape">
+        Fonte: Secretarias Estaduais de Saúde. Brasil, 2020
+      </p>
+    </footer>
+  </article>
+
+  <article class="card grafico" componente-brasil>
+    <header class="card-cabecalho">
+      <h3 class="card-titulo">Óbitos</h3>
+    </header>
+    <div class="card-corpo vermelho"></div>
+    <footer class="card-rodape">
+      <p class="card-texto-rodape">
+        Fonte: Secretarias Estaduais de Saúde. Brasil, 2020
+      </p>
+    </footer>
+  </article>
+
+  <article class="card grafico" componente-brasil>
+    <header class="card-cabecalho">
+      <h3 class="card-titulo">Novos casos por dia</h3>
+    </header>
+    <div class="card-corpo verde"></div>
+    <footer class="card-rodape">
+      <p class="card-texto-rodape">
+        Fonte: Secretarias Estaduais de Saúde. Brasil, 2020
+      </p>
+    </footer>
+  </article>
+
+  <article class="card grafico" style="display: none;" componente-piaui>
+    <header class="card-cabecalho">
+      <h3 class="card-titulo">Casos Confirmados</h3>
+    </header>
+    <div class="card-corpo verde"></div>
+    <footer class="card-rodape">
+      <p class="card-texto-rodape">
+        Fonte: Secretarias Estaduais de Saúde. Brasil, 2020
+      </p>
+    </footer>
+  </article>
+
+  <article class="card grafico" style="display: none;" componente-piaui>
+    <header class="card-cabecalho">
+      <h3 class="card-titulo">Óbitos</h3>
+    </header>
+    <div class="card-corpo vermelho"></div>
+    <footer class="card-rodape">
+      <p class="card-texto-rodape">
+        Fonte: Secretarias Estaduais de Saúde. Brasil, 2020
+      </p>
+    </footer>
+  </article>
+
+  <article class="card grafico" style="display: none;" componente-piaui>
+    <header class="card-cabecalho">
+      <h3 class="card-titulo">Novos casos por dia</h3>
+    </header>
+    <div class="card-corpo verde"></div>
+    <footer class="card-rodape">
+      <p class="card-texto-rodape">
+        Fonte: Secretarias Estaduais de Saúde. Brasil, 2020
+      </p>
+    </footer>
+  </article>
+</section>
+
+{% endblock content %}
