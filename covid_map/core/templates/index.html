@@ -5,7 +5,7 @@
     
 <header class="cabecalho" id="topo">
   <div class="container-centralizado conteudo-cabecalho">
-    <h2>Projeto COVID-19</h2>
+    <h2><MAP></MAP> COVID-19</h2>
     <nav>
       <ul>
         <div class="grupo-aba">
@@ -36,19 +36,13 @@
 
   <article class="card-dados" style="display: none;" componente-piaui>
     <h4>Casos Confirmados</h4>
-    <h2 style="color: #009688;">1200</h2>
+    <h2 style="color: #009688;">{{soma_casos_por_cidade}}</h2>
     <div class="barra-aba verde"></div>
   </article>
 
   <article class="card-dados" style="display: none;" componente-piaui>
-    <h4>Ocupação de leitos</h4>
-    <h2 style="color: #673ab7;">56%</h2>
-    <div class="barra-aba roxo"></div>
-  </article>
-
-  <article class="card-dados" style="display: none;" componente-piaui>
     <h4>Óbitos</h4>
-    <h2 style="color: #f44336;">45</h2>
+    <h2 style="color: #f44336;">{{soma_obitos_por_cidade}}</h2>
     <div class="barra-aba vermelho"></div>
   </article>
 </section>
@@ -70,7 +64,7 @@
     <header class="card-cabecalho">
       <h3 class="card-titulo">Mapa</h3>
     </header>
-    <div class="card-corpo cor-mapa-piaui"></div>
+    <div class="card-corpo cor-mapa-piaui" id="mapaPiaui"></div>
     <footer class="card-rodape">
       <p class="card-texto-rodape">
         Fonte: Secretarias Estaduais de Saúde. Brasil, 2020
@@ -152,5 +146,17 @@
     </footer>
   </article>
 </section>
-
+  
 {% endblock content %}
+
+
+{% block maps %}
+  <script>
+    var dataMapPiaui = [
+    {% for cidade in casos_por_cidades %}
+      ['{{cidade.idIBGE}}', {{cidade.casos}}],
+    {% endfor %}
+    ];
+  </script>
+{% endblock maps %}
+  
