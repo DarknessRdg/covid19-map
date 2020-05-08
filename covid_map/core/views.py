@@ -4,24 +4,27 @@ import json
 import requests
 from datetime import date
 
-# Create your views here.
+
+def get_request_data(url):
+    response = requests.get('http://coronavirus.pi.gov.br/public/api/casos/confirmados.json')
+    response = json.loads(response.text)
+
+    data_parsed = []
+    for data in response:
+        parsed = date(int(data['data'][:4:]), int(data['data'][5:7:]), int(data['data'][8:10:])), data['quantidade']
+        data_parsed.append(parsed)
+    return data_parsed
+
 
 def casos_confirmados():
-    rq = requests.get('http://coronavirus.pi.gov.br/public/api/casos/confirmados.json')
-    dados = json.loads(rq.text)
-    base = []
-    for dado in dados:
-        base.append([date(int(dado['data'][:4:]), int(dado['data'][5:7:]), int(dado['data'][8:10:])), dado['quantidade']])
-    return base
+    url = 'http://coronavirus.pi.gov.br/public/api/casos/confirmados.json'
+    return get_request_data(url)
 
 
 def historico_mortes():
-    rq = requests.get('http://coronavirus.pi.gov.br/public/api/casos/obitos.json')
-    dados = json.loads(rq.text)
-    base = []
-    for dado in dados:
-        base.append([date(int(dado['data'][:4:]), int(dado['data'][5:7:]), int(dado['data'][8:10:])), dado['quantidade']])
-    return base
+    url = 'http://coronavirus.pi.gov.br/public/api/casos/obitos.json'
+    return get_request_data(url)
+
 
 
 def index(requests):
@@ -50,7 +53,3 @@ def importar(request):
     else:
         CasosPorCidadePiaui.objects.bulk_update(book, fields=['casos', 'obitos'])
     return redirect('index')
-
-
-def upload(request):
-    return render(request, 'importar_csv.html')
