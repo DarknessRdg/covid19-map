@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
+from django.views.generic import TemplateView
 from .models import CasosPorCidadePiaui
+from datetime import date
 import json
 import requests
-from datetime import date
 
 
 def get_request_data(url):
@@ -26,30 +27,37 @@ def historico_mortes():
     return get_request_data(url)
 
 
+class Index(TemplateView):
+    template_name = 'index.html'
 
-def index(requests):
-    base = {
-        'casos_por_cidades': CasosPorCidadePiaui.objects.all()
-    }
-    base['soma_obitos_por_cidade'] = sum([cidade.obitos for cidade in base['casos_por_cidades']])
-    base['soma_casos_por_cidade'] = sum([cidade.casos for cidade in base['casos_por_cidades']])
-    base['casosConfirmados'] = casos_confirmados()
-    base['historicoMortes'] = historico_mortes()
-    return render(requests, 'index.html', base)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        queryset = CasosPorCidadePiaui.objects.all()
+
+        context['casos_por_cidades'] = queryset
+        context['soma_obitos_por_cidade'] = sum([cidade.obitos for cidade in queryset])
+        context['soma_casos_por_cidade'] = sum([cidade.casos for cidade in queryset])
+        context['casosConfirmados'] = casos_confirmados()
+        context['historicoMortes'] = historico_mortes()
+        return context
 
 
-def importar(request):
-    file = request.FILES['arquivo'].read().decode('utf-8')
-    cidades = file.replace("\r","").split("\n")
-    book = []
-    for linha in cidades:
-        try:
-            nome, idibge, casos, mortes = linha.split(',')
-            book.append(CasosPorCidadePiaui(name=nome, idIBGE=idibge, casos=casos, obitos=mortes))
-        except ValueError:
-            pass
-    if len(CasosPorCidadePiaui.objects.all()) == 0:
-        CasosPorCidadePiaui.objects.bulk_create(book)
-    else:
-        CasosPorCidadePiaui.objects.bulk_update(book, fields=['casos', 'obitos'])
-    return redirect('index')
+class Upload(TemplateView):
+    template_name = 'importar_csv.html'
+
+    def post(self, request):
+        file = request.FILES['arquivo'].read().decode('utf-8')
+        cidades = file.replace('\r', '').split('\n')
+        book = []
+        for linha in cidades:
+            try:
+                nome, idibge, casos, mortes = linha.split(',')
+                book.append(CasosPorCidadePiaui(name=nome, idIBGE=idibge, casos=casos, obitos=mortes))
+            except ValueError:
+                pass
+
+        if CasosPorCidadePiaui.objects.all().count() == 0:
+            CasosPorCidadePiaui.objects.bulk_create(book)
+        else:
+            CasosPorCidadePiaui.objects.bulk_update(book, fields=['casos', 'obitos'])
+        return redirect('index')
