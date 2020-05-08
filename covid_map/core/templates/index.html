@@ -128,7 +128,9 @@
     <header class="card-cabecalho">
       <h3 class="card-titulo">Óbitos</h3>
     </header>
-    <div class="card-corpo vermelho"></div>
+    <div class="card-corpo">
+      <canvas id="historicoMortes" style="display: block; width: 100px; height: 45px;"></canvas>
+    </div>
     <footer class="card-rodape">
       <p class="card-texto-rodape">
         Fonte: Secretarias Estaduais de Saúde. Brasil, 2020
@@ -168,6 +170,14 @@
   {% for data, casos in casosConfirmados %}
     datasCasos.push('{{data|date:"d/M/y"}}');
     valoresCasos.push({{casos}})
+  {% endfor %}
+</script> 
+<script>
+  var datasHistMortes = [];
+  var valoresHistMortes = [];
+  {% for data, casos in historicoMortes %}
+    datasHistMortes.push('{{data|date:"d/M/y"}}');
+    valoresHistMortes.push({{casos}})
   {% endfor %}
 </script> 
 {% endblock charts %}
