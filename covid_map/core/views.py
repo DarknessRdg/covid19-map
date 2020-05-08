@@ -4,6 +4,7 @@ from .models import CasosPorCidadePiaui
 from datetime import date
 import json
 import requests
+import contextlib
 
 
 def get_request_data(url):
@@ -50,11 +51,9 @@ class Upload(TemplateView):
         cidades = file.replace('\r', '').split('\n')
         book = []
         for linha in cidades:
-            try:
+            with contextlib.suppress(ValueError):
                 nome, idibge, casos, mortes = linha.split(',')
                 book.append(CasosPorCidadePiaui(name=nome, idIBGE=idibge, casos=casos, obitos=mortes))
-            except ValueError:
-                pass
 
         if CasosPorCidadePiaui.objects.all().count() == 0:
             CasosPorCidadePiaui.objects.bulk_create(book)
