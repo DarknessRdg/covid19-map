@@ -114,7 +114,9 @@
     <header class="card-cabecalho">
       <h3 class="card-titulo">Casos Confirmados</h3>
     </header>
-    <div class="card-corpo verde"></div>
+    <div class="card-corpo">
+      <canvas id="casosConfirmados" style="display: block; width: 100px; height: 45px;"></canvas>
+    </div>
     <footer class="card-rodape">
       <p class="card-texto-rodape">
         Fonte: Secretarias Estaduais de Saúde. Brasil, 2020
@@ -149,7 +151,6 @@
   
 {% endblock content %}
 
-
 {% block maps %}
   <script>
     var dataMapPiaui = [
@@ -159,4 +160,15 @@
     ];
   </script>
 {% endblock maps %}
-  
+
+{% block charts %}
+<script>
+  var datasCasos = [];
+  var valoresCasos = [];
+  {% for data, casos in casosConfirmados %}
+    datasCasos.push('{{data|date:"d/M/y"}}');
+    valoresCasos.push({{casos}})
+  {% endfor %}
+</script> 
+{% endblock charts %}
+    
