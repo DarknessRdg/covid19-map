@@ -142,7 +142,9 @@
     <header class="card-cabecalho">
       <h3 class="card-titulo">Novos casos por dia</h3>
     </header>
-    <div class="card-corpo verde"></div>
+    <div class="card-corpo">
+      <canvas id="novosCasos" style="display: block; width: 100px; height: 45px;"></canvas>
+    </div>
     <footer class="card-rodape">
       <p class="card-texto-rodape">
         Fonte: Secretarias Estaduais de Saúde. Brasil, 2020
@@ -178,6 +180,14 @@
   {% for data, casos in historicoMortes %}
     datasHistMortes.push('{{data|date:"d/M/y"}}');
     valoresHistMortes.push({{casos}})
+  {% endfor %}
+</script> 
+<script>
+  var datasNovosCasos = [];
+  var valoresNovosCasos = [];
+  {% for data, casos in novosCasos %}
+    datasNovosCasos.push('{{data|date:"d/M/y"}}');
+    valoresNovosCasos.push({{casos}})
   {% endfor %}
 </script> 
 {% endblock charts %}

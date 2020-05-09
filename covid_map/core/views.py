@@ -7,6 +7,17 @@ import requests
 import contextlib
 
 
+def get_request_data_new_cases(url):
+    response = requests.get(url)
+    response = json.loads(response.text)
+
+    data_parsed = []
+    for data in response:
+        parsed = date(date.today().year, int(data['label'][4::]), int(data['label'][:2:])), data['data']
+        data_parsed.append(parsed)
+    return data_parsed
+
+
 def get_request_data(url):
     response = requests.get(url)
     response = json.loads(response.text)
@@ -28,6 +39,11 @@ def historico_mortes():
     return get_request_data(url)
 
 
+def novos_casos():
+    url = 'http://coronavirus.pi.gov.br/public/api/novos-casos.json'
+    return get_request_data_new_cases(url)
+
+
 class Index(TemplateView):
     template_name = 'index.html'
 
@@ -40,6 +56,7 @@ class Index(TemplateView):
         context['soma_casos_por_cidade'] = sum([cidade.casos for cidade in queryset])
         context['casosConfirmados'] = casos_confirmados()
         context['historicoMortes'] = historico_mortes()
+        context['novosCasos'] = novos_casos()
         return context
 
 
