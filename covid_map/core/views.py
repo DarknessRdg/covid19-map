@@ -1,30 +1,79 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
+from django.views.generic import TemplateView
 from .models import CasosPorCidadePiaui
-
-# Create your views here.
-
-def index(requests):
-    base = {
-        'casos_por_cidades': CasosPorCidadePiaui.objects.all()
-    }
-    base['soma_obitos_por_cidade'] = sum([cidade.obitos for cidade in base['casos_por_cidades']])
-    base['soma_casos_por_cidade'] = sum([cidade.casos for cidade in base['casos_por_cidades']])
-    return render(requests, 'index.html', base)
+from datetime import date
+import json
+import requests
+import contextlib
 
 
-def importar(request):
-    file = request.FILES['arquivo'].read().decode('utf-8')
-    cidades = file.replace("\r","").split("\n")
-    book = []
-    for linha in cidades:
-        try:
-            nome, idibge, casos, mortes = linha.split(',')
-            book.append(CasosPorCidadePiaui(name=nome, idIBGE=idibge, casos=casos, obitos=mortes))
-        except ValueError:
-            pass
-    CasosPorCidadePiaui.objects.bulk_create(book)
-    return redirect('index')
+def get_request_data_new_cases(url):
+    response = requests.get(url)
+    response = json.loads(response.text)
+
+    data_parsed = []
+    for data in response:
+        parsed = date(date.today().year, int(data['label'][4::]), int(data['label'][:2:])), data['data']
+        data_parsed.append(parsed)
+    return data_parsed
 
 
-def upload(request):
-    return render(request, 'importar_csv.html')
+def get_request_data(url):
+    response = requests.get(url)
+    response = json.loads(response.text)
+
+    data_parsed = []
+    for data in response:
+        parsed = date(int(data['data'][:4:]), int(data['data'][5:7:]), int(data['data'][8:10:])), data['quantidade']
+        data_parsed.append(parsed)
+    return data_parsed
+
+
+def casos_confirmados():
+    url = 'http://coronavirus.pi.gov.br/public/api/casos/confirmados.json'
+    return get_request_data(url)
+
+
+def historico_mortes():
+    url = 'http://coronavirus.pi.gov.br/public/api/casos/obitos.json'
+    return get_request_data(url)
+
+
+def novos_casos():
+    url = 'http://coronavirus.pi.gov.br/public/api/novos-casos.json'
+    return get_request_data_new_cases(url)
+
+
+class Index(TemplateView):
+    template_name = 'index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        queryset = CasosPorCidadePiaui.objects.all()
+
+        context['casos_por_cidades'] = queryset
+        context['soma_obitos_por_cidade'] = sum([cidade.obitos for cidade in queryset])
+        context['soma_casos_por_cidade'] = sum([cidade.casos for cidade in queryset])
+        context['casosConfirmados'] = casos_confirmados()
+        context['historicoMortes'] = historico_mortes()
+        context['novosCasos'] = novos_casos()
+        return context
+
+
+class Upload(TemplateView):
+    template_name = 'importar_csv.html'
+
+    def post(self, request):
+        file = request.FILES['arquivo'].read().decode('utf-8')
+        cidades = file.replace('\r', '').split('\n')
+        book = []
+        for linha in cidades:
+            with contextlib.suppress(ValueError):
+                nome, idibge, casos, mortes = linha.split(',')
+                book.append(CasosPorCidadePiaui(name=nome, idIBGE=idibge, casos=casos, obitos=mortes))
+
+        if CasosPorCidadePiaui.objects.all().count() == 0:
+            CasosPorCidadePiaui.objects.bulk_create(book)
+        else:
+            CasosPorCidadePiaui.objects.bulk_update(book, fields=['casos', 'obitos'])
+        return redirect('index')

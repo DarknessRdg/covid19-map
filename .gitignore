@@ -112,3 +112,6 @@ media/
 !**/migrations/__init__.py
 # Arquivos CSV
 *.csv 
+
+# pycharm environment
+.idea/

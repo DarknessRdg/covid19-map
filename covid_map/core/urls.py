@@ -1,8 +1,7 @@
 from django.urls import path
-from .views import index, importar, upload
+from core import views
 
 urlpatterns = [
-    path('', index, name='index'),
-    path('importar/', importar, name='importar'),
-    path('upload/', upload, name='upload')
+    path('', views.Index.as_view(), name='index'),
+    path('upload/', views.Upload.as_view(), name='upload')
 ]
