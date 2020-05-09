@@ -36,3 +36,16 @@ abaBrasil.addEventListener("click", () => {
 abaPiaui.addEventListener("click", () => {
   ativaBarraPiaui();
 });
+
+// Menu Responsivo
+let showMenu = true;
+
+const menuToggle = document.querySelector(".menu-toggle");
+const secaoMenu = document.querySelector(".secao-menu");
+
+menuToggle.addEventListener("click", () => {
+  document.body.style.overflow = showMenu ? "hidden" : "initial";
+
+  secaoMenu.classList.toggle("on", showMenu);
+  showMenu = !showMenu;
+});

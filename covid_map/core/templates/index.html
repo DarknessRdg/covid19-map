@@ -1,72 +1,76 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
 
-
-{% block content %}
-    
-<header class="cabecalho" id="topo">
+<header class="cabecalho">
   <div class="container-centralizado conteudo-cabecalho">
-    <h2><MAP></MAP> COVID-19</h2>
-    <nav>
-      <ul>
-        <div class="grupo-aba">
-          <button id="aba-brasil">Brasil</button>
-          <div id="barra-brasil" class="barra-aba verde"></div>
-        </div>
-        <div class="grupo-aba">
-          <button id="aba-piaui">Piauí</button>
-          <div id="barra-piaui" class="barra-aba verde"></div>
-        </div>
-      </ul>
-    </nav>
+    <h2><map></map> COVID-19</h2>
+    <div class="secao-menu">
+      <div class="menu-toggle">
+        <div class="one"></div>
+        <div class="two"></div>
+        <div class="three"></div>
+      </div>
+      <nav>
+        <ul>
+          <div class="grupo-aba">
+            <button id="aba-piaui" class="botao-cabecalho">Piauí</button>
+            <div id="barra-piaui" class="barrinha-horizontal bg-verde"></div>
+          </div>
+          <div class="grupo-aba">
+            <button id="aba-brasil" class="botao-cabecalho">Brasil</button>
+            <div id="barra-brasil" class="barrinha-horizontal bg-verde"></div>
+          </div>
+        </ul>
+      </nav>
+    </div>
   </div>
 </header>
 
 <section class="container-centralizado container-cards-dados">
-  <article class="card-dados" componente-brasil>
-    <h4>Casos Confirmados</h4>
-    <h2 style="color: #009688;">536000</h2>
-    <div class="barra-aba verde"></div>
+  <article class="card-dados" style="display: none;" componente-brasil>
+    <h3>Casos Confirmados</h3>
+    <h2 class="texto-verde">536000</h2>
+    <div class="barrinha-horizontal bg-verde"></div>
   </article>
 
-  <article class="card-dados" componente-brasil>
-    <h4>Óbitos</h4>
-    <h2 style="color: #f44336;">8536</h2>
-    <div class="barra-aba vermelho"></div>
+  <article class="card-dados" style="display: none;" componente-brasil>
+    <h3>Óbitos</h3>
+    <h2 class="texto-vermelho">8536</h2>
+    <div class="barrinha-horizontal bg-vermelho"></div>
   </article>
 
-  <article class="card-dados" style="display: none;" componente-piaui>
-    <h4>Casos Confirmados</h4>
-    <h2 style="color: #009688;">{{soma_casos_por_cidade}}</h2>
-    <div class="barra-aba verde"></div>
+  <article class="card-dados" componente-piaui>
+    <h3>Casos Confirmados</h3>
+    <h2 class="texto-verde">{{soma_casos_por_cidade}}</h2>
+    <div class="barrinha-horizontal bg-verde"></div>
   </article>
 
-  <article class="card-dados" style="display: none;" componente-piaui>
-    <h4>Óbitos</h4>
-    <h2 style="color: #f44336;">{{soma_obitos_por_cidade}}</h2>
-    <div class="barra-aba vermelho"></div>
+  <article class="card-dados" componente-piaui>
+    <h3>Óbitos</h3>
+    <h2 class="texto-vermelho">{{soma_obitos_por_cidade}}</h2>
+    <div class="barrinha-horizontal bg-vermelho"></div>
   </article>
 </section>
 
 <main class="container-centralizado">
-  <article class="card" componente-brasil>
+  <article class="card" style="display: none;" componente-brasil>
     <header class="card-cabecalho">
       <h3 class="card-titulo">Mapa</h3>
     </header>
-    <div class="card-corpo cor-mapa-brasil"></div>
+    <div class="card-corpo"></div>
     <footer class="card-rodape">
-      <p class="card-texto-rodape">
+      <p>
         Fonte: Secretarias Estaduais de Saúde. Brasil, 2020
       </p>
     </footer>
   </article>
 
-  <article class="card" style="display: none;" componente-piaui>
+  <article class="card" componente-piaui>
     <header class="card-cabecalho">
       <h3 class="card-titulo">Mapa</h3>
     </header>
-    <div class="card-corpo cor-mapa-piaui" id="mapaPiaui"></div>
+    <div class="card-corpo" id="mapaPiaui"></div>
     <footer class="card-rodape">
-      <p class="card-texto-rodape">
+      <p>
         Fonte: Secretarias Estaduais de Saúde. Brasil, 2020
       </p>
     </footer>
@@ -74,89 +78,137 @@
 </main>
 
 <section class="container-centralizado">
-  <article class="card grafico" componente-brasil>
+  <article class="card" style="display: none;" componente-brasil>
     <header class="card-cabecalho">
       <h3 class="card-titulo">Casos Confirmados</h3>
     </header>
-    <div class="card-corpo verde"></div>
+    <div class="card-corpo"></div>
     <footer class="card-rodape">
-      <p class="card-texto-rodape">
+      <p>
         Fonte: Secretarias Estaduais de Saúde. Brasil, 2020
       </p>
     </footer>
   </article>
 
-  <article class="card grafico" componente-brasil>
+  <article class="card" style="display: none;" componente-brasil>
     <header class="card-cabecalho">
       <h3 class="card-titulo">Óbitos</h3>
     </header>
-    <div class="card-corpo vermelho"></div>
+    <div class="card-corpo"></div>
     <footer class="card-rodape">
-      <p class="card-texto-rodape">
+      <p>
         Fonte: Secretarias Estaduais de Saúde. Brasil, 2020
       </p>
     </footer>
   </article>
 
-  <article class="card grafico" componente-brasil>
+  <article class="card" style="display: none;" componente-brasil>
     <header class="card-cabecalho">
-      <h3 class="card-titulo">Novos casos por dia</h3>
+      <h3 class="card-titulo">Novos Casos Por Dia</h3>
     </header>
-    <div class="card-corpo verde"></div>
+    <div class="card-corpo"></div>
     <footer class="card-rodape">
-      <p class="card-texto-rodape">
+      <p>
         Fonte: Secretarias Estaduais de Saúde. Brasil, 2020
       </p>
     </footer>
   </article>
 
-  <article class="card grafico" style="display: none;" componente-piaui>
+  <article class="card" componente-piaui>
     <header class="card-cabecalho">
       <h3 class="card-titulo">Casos Confirmados</h3>
     </header>
-    <div class="card-corpo verde"></div>
+    <div class="card-corpo">
+      <canvas
+        id="casosConfirmados"
+        style="display: block; width: 100px; height: 45px;"
+      ></canvas>
+    </div>
     <footer class="card-rodape">
-      <p class="card-texto-rodape">
+      <p>
         Fonte: Secretarias Estaduais de Saúde. Brasil, 2020
       </p>
     </footer>
   </article>
 
-  <article class="card grafico" style="display: none;" componente-piaui>
+  <article class="card" componente-piaui>
     <header class="card-cabecalho">
       <h3 class="card-titulo">Óbitos</h3>
     </header>
-    <div class="card-corpo vermelho"></div>
+    <div class="card-corpo">
+      <canvas
+        id="historicoMortes"
+        style="display: block; width: 100px; height: 45px;"
+      ></canvas>
+    </div>
     <footer class="card-rodape">
-      <p class="card-texto-rodape">
+      <p>
         Fonte: Secretarias Estaduais de Saúde. Brasil, 2020
       </p>
     </footer>
   </article>
 
-  <article class="card grafico" style="display: none;" componente-piaui>
+  <article class="card" componente-piaui>
     <header class="card-cabecalho">
-      <h3 class="card-titulo">Novos casos por dia</h3>
+      <h3 class="card-titulo">Novos Casos Por Dia</h3>
     </header>
-    <div class="card-corpo verde"></div>
+    <div class="card-corpo"></div>
     <footer class="card-rodape">
-      <p class="card-texto-rodape">
+      <p>
         Fonte: Secretarias Estaduais de Saúde. Brasil, 2020
       </p>
     </footer>
   </article>
 </section>
-  
-{% endblock content %}
 
+<footer class="rodape">
+  <a
+    href="https://github.com/IFPiaui/covid19-map"
+    target="_blank"
+    class="botao-github"
+  >
+    <div class="conteudo-link-github">
+      <svg
+        class="octicon octicon-mark-github v-align-middle"
+        height="32"
+        viewBox="0 0 16 16"
+        version="1.1"
+        width="32"
+        aria-hidden="true"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+        ></path>
+      </svg>
+      <p>Acesse nosso projeto</p>
+    </div>
+  </a>
+</footer>
 
-{% block maps %}
-  <script>
-    var dataMapPiaui = [
-    {% for cidade in casos_por_cidades %}
-      ['{{cidade.idIBGE}}', {{cidade.casos}}],
-    {% endfor %}
-    ];
-  </script>
-{% endblock maps %}
-  
+{% endblock content %} {% block maps %}
+<script>
+  var dataMapPiaui = [
+  {% for cidade in casos_por_cidades %}
+    ['{{cidade.idIBGE}}', {{cidade.casos}}],
+  {% endfor %}
+  ];
+</script>
+{% endblock maps %} {% block charts %}
+<script>
+  var datasCasos = [];
+  var valoresCasos = [];
+  {% for data, casos in casosConfirmados %}
+    datasCasos.push('{{data|date:"d/M/y"}}');
+    valoresCasos.push({{casos}})
+  {% endfor %}
+</script>
+<script>
+  var datasHistMortes = [];
+  var valoresHistMortes = [];
+  {% for data, casos in historicoMortes %}
+    datasHistMortes.push('{{data|date:"d/M/y"}}');
+    valoresHistMortes.push({{casos}})
+  {% endfor %}
+</script>
+{% endblock charts %}
