@@ -50,7 +50,7 @@ var myChart2 = new Chart(ctx2, {
     data: {
         labels: datasHistMortes,
         datasets: [{
-            label: 'Casos confirmados',
+            label: 'Óbitos',
             data: valoresHistMortes,
             backgroundColor: colorsPrimary,
             borderColor: colorsBorder,

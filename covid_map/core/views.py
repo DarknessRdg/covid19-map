@@ -8,7 +8,7 @@ import contextlib
 
 
 def get_request_data(url):
-    response = requests.get('http://coronavirus.pi.gov.br/public/api/casos/confirmados.json')
+    response = requests.get(url)
     response = json.loads(response.text)
 
     data_parsed = []
