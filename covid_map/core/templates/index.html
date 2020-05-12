@@ -1,4 +1,5 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} 
+{% block content %}
 
 <header class="cabecalho">
   <div class="container-centralizado conteudo-cabecalho">
@@ -28,13 +29,13 @@
 <section class="container-centralizado container-cards-dados">
   <article class="card-dados" style="display: none;" componente-brasil>
     <h3>Casos Confirmados</h3>
-    <h2 class="texto-verde">536000</h2>
+    <h2 class="texto-verde">{{soma_casos_brasil}}</h2>
     <div class="barrinha-horizontal bg-verde"></div>
   </article>
 
   <article class="card-dados" style="display: none;" componente-brasil>
     <h3>Óbitos</h3>
-    <h2 class="texto-vermelho">8536</h2>
+    <h2 class="texto-vermelho">{{soma_obitos_brasil}}</h2>
     <div class="barrinha-horizontal bg-vermelho"></div>
   </article>
 
@@ -56,7 +57,7 @@
     <header class="card-cabecalho">
       <h3 class="card-titulo">Mapa</h3>
     </header>
-    <div class="card-corpo"></div>
+    <div class="card-corpo" id="mapaBrasil"></div>
     <footer class="card-rodape">
       <p>
         Fonte: Secretarias Estaduais de Saúde. Brasil, 2020
@@ -78,11 +79,17 @@
 </main>
 
 <section class="container-centralizado">
+
   <article class="card" style="display: none;" componente-brasil>
     <header class="card-cabecalho">
-      <h3 class="card-titulo">Casos Confirmados</h3>
+      <h3 class="card-titulo">Acomulado de mortes</h3>
     </header>
-    <div class="card-corpo"></div>
+    <div class="card-corpo">
+      <canvas
+        id="mortesPorEstado"
+        style="display: block; width: 100px; height: 45px;"
+      ></canvas>
+    </div>
     <footer class="card-rodape">
       <p>
         Fonte: Secretarias Estaduais de Saúde. Brasil, 2020
@@ -92,9 +99,14 @@
 
   <article class="card" style="display: none;" componente-brasil>
     <header class="card-cabecalho">
-      <h3 class="card-titulo">Óbitos</h3>
+      <h3 class="card-titulo">Novos casos por dia</h3>
     </header>
-    <div class="card-corpo"></div>
+    <div class="card-corpo">
+      <canvas
+        id="novosCasosPorEstado"
+        style="display: block; width: 100px; height: 45px;"
+      ></canvas>
+    </div>
     <footer class="card-rodape">
       <p>
         Fonte: Secretarias Estaduais de Saúde. Brasil, 2020
@@ -104,9 +116,14 @@
 
   <article class="card" style="display: none;" componente-brasil>
     <header class="card-cabecalho">
-      <h3 class="card-titulo">Novos Casos Por Dia</h3>
+      <h3 class="card-titulo">Novos óbitos por dia</h3>
     </header>
-    <div class="card-corpo"></div>
+    <div class="card-corpo">
+      <canvas
+        id="novasMortesPorEstado"
+        style="display: block; width: 100px; height: 45px;"
+      ></canvas>
+    </div>
     <footer class="card-rodape">
       <p>
         Fonte: Secretarias Estaduais de Saúde. Brasil, 2020
@@ -191,7 +208,8 @@
   </a>
 </footer>
 
-{% endblock content %} {% block maps %}
+{% endblock content %} 
+{% block maps %}
 <script>
   var dataMapPiaui = [
   {% for cidade in casos_por_cidades %}
@@ -199,7 +217,15 @@
   {% endfor %}
   ];
 </script>
-{% endblock maps %} {% block charts %}
+<script>
+  var dataMapBrasil = [
+  {% for nome, casos in casos_por_estado %}
+    ['{{nome}}', {{casos}}],
+  {% endfor %}
+  ];
+</script>
+{% endblock maps %} 
+{% block charts %}
 <script>
   var datasCasos = [];
   var valoresCasos = [];
@@ -222,6 +248,30 @@
   {% for data, casos in novosCasos %}
     datasNovosCasos.push('{{data|date:"d/M/y"}}');
     valoresNovosCasos.push({{casos}})
+  {% endfor %}
+</script>
+<script>
+  var ufNovasCasos = [];
+  var novosCasosUF = [];
+  {% for uf, cases in new_cases_for_state %}
+    ufNovasCasos.push('{{uf}}');
+    novosCasosUF.push({{cases}})
+  {% endfor %}
+</script>
+<script>
+  var ufNovasMortes = [];
+  var novasMortesUF = [];
+  {% for uf, deaths in new_deaths_for_state %}
+    ufNovasMortes.push('{{uf}}')
+    novasMortesUF.push({{deaths}})
+  {% endfor %}
+</script>
+<script>
+  var ufMortes = [];
+  var mortesUF = [];
+  {% for uf, deaths in deaths_for_state %}
+    ufMortes.push('{{uf}}')
+    mortesUF.push({{deaths}})
   {% endfor %}
 </script>
 {% endblock charts %}
