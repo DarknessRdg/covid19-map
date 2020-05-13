@@ -1,0 +1,21 @@
+#map {
+    height: 70vh;
+    overflow: hidden;
+}
+
+.leaflet-container {
+    background-color: transparent !important;
+    border-style: solid;
+    border-width: 1px;
+}
+
+path.leaflet-interactive {
+    stroke-width: 1;
+    /* fill: #c1c1c1; */
+    stroke: #777
+}
+
+p#casos_confirmados,
+p#mortes {
+    font-size: 5em;
+}
