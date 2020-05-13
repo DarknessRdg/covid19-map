@@ -1,4 +1,4 @@
-Highcharts.getJSON('https://raw.githubusercontent.com/IFPiaui/covid19-map/master/static_jsons/limites.json', function (geojson) {
+Highcharts.getJSON('https://raw.githubusercontent.com/IFPiaui/covid19-map/master/static_jsons/limites_simplePI.json', function (geojson) {
     Highcharts.mapChart('mapaPiaui', {
         chart: {
             map: geojson
