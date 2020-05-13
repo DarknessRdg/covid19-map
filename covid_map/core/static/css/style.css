@@ -128,7 +128,7 @@ button {
 
 .card {
   min-width: 200px;
-  min-height: 600px;
+  max-height: 600px;
   margin-top: 30px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 6px;
@@ -143,14 +143,95 @@ button {
   margin-left: 20px;
 }
 
-.card-corpo {
-  height: 500px;
-}
-
 .card-rodape {
   padding: 10px;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   color: #616161;
+}
+
+footer.rodape {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.colaboradores {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  margin-bottom: 30px;
+}
+
+.colaboradores-cabecalho {
+  border-bottom: 1px solid rgb(0, 0, 0, 0.1);
+  padding: 10px;
+}
+
+.colaboradores-cabecalho h3 {
+  margin-left: 20px;
+}
+
+.colaboradores-conteudo {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.colaborador {
+  display: flex;
+  flex-direction: row;
+  text-decoration: none;
+  color: black;
+  margin: 10px;
+}
+
+.colaborador img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.colaborador div {
+  margin-left: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.colaborador div p {
+  color: gray;
+}
+
+.colaboradores-rodape {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}
+
+.botao-github {
+  height: 100%;
+  width: 100%;
+  border-radius: 6px;
+  background-color: #515151;
+  color: #fff;
+  text-decoration: none;
+}
+
+.botao-github:hover {
+  filter: brightness(90%);
+}
+
+.conteudo-botao-github {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+[componente-brasil] {
+  display: none;
 }
 
 @media (max-width: 630px) {
@@ -228,6 +309,19 @@ button {
 }
 
 @media (max-width: 420px) {
+  p {
+    font-size: 80%;
+  }
+
+  .card-titulo,
+  h3 {
+    font-size: 90%;
+  }
+
+  .card-titulo {
+    margin-left: 3px;
+  }
+
   .cabecalho {
     width: 100%;
   }
@@ -236,36 +330,10 @@ button {
     display: flex;
     justify-content: center;
   }
-}
 
-footer.rodape {
-  margin-top: 50px;
-  height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.conteudo-link-github {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
-
-.conteudo-link-github p {
-  margin-left: 8px;
-}
-
-.botao-github {
-  background-color: #515151;
-  text-decoration: none;
-  padding: 8px 10px;
-  color: #fff;
-  border-radius: 8px;
-  margin-bottom: 12px;
-}
-
-.botao-github:hover {
-  filter: brightness(90%);
+  .colaborador img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
 }

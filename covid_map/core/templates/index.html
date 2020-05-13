@@ -1,4 +1,4 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 {% block content %}
 
 <header class="cabecalho">
@@ -27,13 +27,13 @@
 </header>
 
 <section class="container-centralizado container-cards-dados">
-  <article class="card-dados" style="display: none;" componente-brasil>
+  <article class="card-dados" componente-brasil>
     <h3>Casos Confirmados</h3>
     <h2 class="texto-verde">{{soma_casos_brasil}}</h2>
     <div class="barrinha-horizontal bg-verde"></div>
   </article>
 
-  <article class="card-dados" style="display: none;" componente-brasil>
+  <article class="card-dados" componente-brasil>
     <h3>Óbitos</h3>
     <h2 class="texto-vermelho">{{soma_obitos_brasil}}</h2>
     <div class="barrinha-horizontal bg-vermelho"></div>
@@ -53,14 +53,14 @@
 </section>
 
 <main class="container-centralizado">
-  <article class="card" style="display: none;" componente-brasil>
+  <article class="card" componente-brasil>
     <header class="card-cabecalho">
       <h3 class="card-titulo">Mapa</h3>
     </header>
     <div class="card-corpo" id="mapaBrasil"></div>
     <footer class="card-rodape">
       <p>
-        Fonte: Secretarias Estaduais de Saúde. Brasil, 2020
+        Highcharts
       </p>
     </footer>
   </article>
@@ -72,7 +72,7 @@
     <div class="card-corpo" id="mapaPiaui"></div>
     <footer class="card-rodape">
       <p>
-        Fonte: Secretarias Estaduais de Saúde. Brasil, 2020
+        Highcharts
       </p>
     </footer>
   </article>
@@ -80,198 +80,238 @@
 
 <section class="container-centralizado">
 
-  <article class="card" style="display: none;" componente-brasil>
+  <article class="card" componente-brasil>
     <header class="card-cabecalho">
-      <h3 class="card-titulo">Acomulado de mortes</h3>
+      <h3 class="card-titulo">Óbitos acumulados de COVID-19 por data de notificação</h3>
     </header>
     <div class="card-corpo">
-      <canvas
-        id="mortesPorEstado"
-        style="display: block; width: 100px; height: 45px;"
-      ></canvas>
+      <canvas id="mortesPorEstado" style="display: block; width: 100px; height: 45px;"></canvas>
     </div>
     <footer class="card-rodape">
       <p>
-        Fonte: Secretarias Estaduais de Saúde. Brasil, 2020
+        Fonte: Brasil.io
       </p>
     </footer>
   </article>
 
-  <article class="card" style="display: none;" componente-brasil>
+  <article class="card" componente-brasil>
     <header class="card-cabecalho">
-      <h3 class="card-titulo">Novos casos por dia</h3>
+      <h3 class="card-titulo">Casos novos de COVID-19 por data de notificação</h3>
     </header>
     <div class="card-corpo">
-      <canvas
-        id="novosCasosPorEstado"
-        style="display: block; width: 100px; height: 45px;"
-      ></canvas>
+      <canvas id="novosCasosPorEstado" style="display: block; width: 100px; height: 45px;"></canvas>
     </div>
     <footer class="card-rodape">
       <p>
-        Fonte: Secretarias Estaduais de Saúde. Brasil, 2020
+        Fonte: Brasil.io
       </p>
     </footer>
   </article>
 
-  <article class="card" style="display: none;" componente-brasil>
+  <article class="card" componente-brasil>
     <header class="card-cabecalho">
-      <h3 class="card-titulo">Novos óbitos por dia</h3>
+      <h3 class="card-titulo">Novos óbitos de COVID-19 por data de notificação</h3>
     </header>
     <div class="card-corpo">
-      <canvas
-        id="novasMortesPorEstado"
-        style="display: block; width: 100px; height: 45px;"
-      ></canvas>
+      <canvas id="novasMortesPorEstado" style="display: block; width: 100px; height: 45px;"></canvas>
     </div>
     <footer class="card-rodape">
       <p>
-        Fonte: Secretarias Estaduais de Saúde. Brasil, 2020
+        Fonte: Brasil.io
       </p>
     </footer>
   </article>
 
   <article class="card" componente-piaui>
     <header class="card-cabecalho">
-      <h3 class="card-titulo">Casos Confirmados</h3>
+      <h3 class="card-titulo">Casos acumulados de COVID-19 por data de notificação</h3>
     </header>
     <div class="card-corpo">
-      <canvas
-        id="casosConfirmados"
-        style="display: block; width: 100px; height: 45px;"
-      ></canvas>
+      <canvas id="casosConfirmados" style="display: block; width: 100px; height: 45px;"></canvas>
     </div>
     <footer class="card-rodape">
       <p>
-        Fonte: Secretarias Estaduais de Saúde. Brasil, 2020
+        Fonte: Brasil.io
       </p>
     </footer>
   </article>
 
   <article class="card" componente-piaui>
     <header class="card-cabecalho">
-      <h3 class="card-titulo">Óbitos</h3>
+      <h3 class="card-titulo">Óbitos acumulados de COVID-19 por data de notificação</h3>
     </header>
     <div class="card-corpo">
-      <canvas
-        id="historicoMortes"
-        style="display: block; width: 100px; height: 45px;"
-      ></canvas>
+      <canvas id="historicoMortes" style="display: block; width: 100px; height: 45px;"></canvas>
     </div>
     <footer class="card-rodape">
       <p>
-        Fonte: Secretarias Estaduais de Saúde. Brasil, 2020
+        Fonte: Brasil.io
       </p>
     </footer>
   </article>
 
   <article class="card" componente-piaui>
     <header class="card-cabecalho">
-      <h3 class="card-titulo">Novos Casos Por Dia</h3>
+      <h3 class="card-titulo">Casos novos de COVID-19 por data de notificação</h3>
     </header>
     <div class="card-corpo">
-      <canvas
-        id="novosCasos"
-        style="display: block; width: 100px; height: 45px;"
-      ></canvas>
+      <canvas id="novosCasos" style="display: block; width: 100px; height: 45px;"></canvas>
     </div>
     <footer class="card-rodape">
       <p>
-        Fonte: Secretarias Estaduais de Saúde. Brasil, 2020
+        Fonte: Brasil.io
       </p>
     </footer>
   </article>
 </section>
 
-<footer class="rodape">
-  <a
-    href="https://github.com/IFPiaui/covid19-map"
-    target="_blank"
-    class="botao-github"
-  >
-    <div class="conteudo-link-github">
-      <svg
-        class="octicon octicon-mark-github v-align-middle"
-        height="32"
-        viewBox="0 0 16 16"
-        version="1.1"
-        width="32"
-        aria-hidden="true"
-      >
-        <path
-          fill-rule="evenodd"
-          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
-        ></path>
-      </svg>
-      <p>Acesse nosso projeto</p>
+<footer class="rodape container-centralizado">
+  <div class="colaboradores">
+    <div class="colaboradores-cabecalho">
+      <h3>Colaboradores</h3>
     </div>
-  </a>
+    <div class="colaboradores-conteudo">
+      <a href="https://github.com/rogeriosilva-ifpi" class="colaborador" target="_blank">
+        <img
+          src="https://avatars0.githubusercontent.com/u/64442407?s=460&u=8924de9441fbffd2ca9021ad67248e8d5033acbe&v=4"
+          alt="Rogério Silva">
+        <div>
+          <h3>Rogério Silva</h3>
+          <p>rogeriosilva-ifpi</p>
+        </div>
+      </a>
+
+      <a href="https://github.com/felipeifpi" class="colaborador" target="_blank">
+        <img src="https://avatars1.githubusercontent.com/u/64698489?s=460&v=4" alt="Felipe Dantas">
+        <div>
+          <h3>Felipe Dantas</h3>
+          <p>felipeifpi</p>
+        </div>
+      </a>
+
+      <a href="https://github.com/LuisHenrique01" class="colaborador" target="_blank">
+        <img
+          src="https://avatars0.githubusercontent.com/u/48893843?s=460&u=0ae91e258e251405eb1ec8f8b101f6cdbf6b489a&v=4"
+          alt="Luis Henrique">
+        <div>
+          <h3>Luis Henrique</h3>
+          <p>LuisHenrique01</p>
+        </div>
+      </a>
+
+      <a href="https://github.com/marcosv2468" class="colaborador" target="_blank">
+        <img
+          src="https://avatars2.githubusercontent.com/u/28361577?s=460&u=89a6c19069302bffe9b76a4cc7c6576403ff7aef&v=4"
+          alt="Marcos Vinícius">
+        <div>
+          <h3>Marcos Vinícius</h3>
+          <p>marcosv2468</p>
+        </div>
+      </a>
+
+      <a href="https://github.com/webalysson" class="colaborador" target="_blank">
+        <img
+          src="https://avatars1.githubusercontent.com/u/19244879?s=460&u=97b7b184b9bbd3fb8c4e29b58c451fbff2bc83cc&v=4"
+          alt="Francisco Alysson">
+        <div>
+          <h3>Francisco Alysson</h3>
+          <p>webalysson</p>
+        </div>
+      </a>
+
+      <a href="https://github.com/DarknessRdg" class="colaborador" target="_blank">
+        <img
+          src="https://avatars2.githubusercontent.com/u/38518014?s=460&u=c676e19dd4d027a1df90e4121674660bceef789f&v=4"
+          alt="Luan Rodrigues">
+        <div>
+          <h3>Luan Rodrigues</h3>
+          <p>DarknessRdg</p>
+        </div>
+      </a>
+
+      <div class="colaboradores-rodape">
+        <a href="https://github.com/IFPiaui/covid19-map" target="_blank" class="botao-github">
+          <div class="conteudo-botao-github">
+            <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
+              width="32" aria-hidden="true">
+              <path fill-rule="evenodd"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+              </path>
+            </svg>
+            <p>Acesse o projeto completo</p>
+          </div>
+        </a>
+      </div>
+
+    </div>
+
+  </div>
 </footer>
 
-{% endblock content %} 
+{% endblock content %}
 {% block maps %}
 <script>
   var dataMapPiaui = [
-  {% for cidade in casos_por_cidades %}
-    ['{{cidade.idIBGE}}', {{cidade.casos}}],
-  {% endfor %}
+    {% for cidade in casos_por_cidades %}
+  ['{{cidade.idIBGE}}', {{ cidade.casos }}],
+    {% endfor %}
   ];
 </script>
 <script>
   var dataMapBrasil = [
-  {% for nome, casos in casos_por_estado %}
-    ['{{nome}}', {{casos}}],
-  {% endfor %}
+    {% for nome, casos in casos_por_estado %}
+  ['{{nome}}', {{ casos }}],
+    {% endfor %}
   ];
 </script>
-{% endblock maps %} 
+{% endblock maps %}
 {% block charts %}
 <script>
   var datasCasos = [];
   var valoresCasos = [];
   {% for data, casos in casosConfirmados %}
-    datasCasos.push('{{data|date:"d/M/y"}}');
-    valoresCasos.push({{casos}})
+  datasCasos.push('{{data|date:"d/M/y"}}');
+  valoresCasos.push({{ casos }})
   {% endfor %}
 </script>
 <script>
   var datasHistMortes = [];
   var valoresHistMortes = [];
   {% for data, casos in historicoMortes %}
-    datasHistMortes.push('{{data|date:"d/M/y"}}');
-    valoresHistMortes.push({{casos}})
+  datasHistMortes.push('{{data|date:"d/M/y"}}');
+  valoresHistMortes.push({{ casos }})
   {% endfor %}
 </script>
 <script>
   var datasNovosCasos = [];
   var valoresNovosCasos = [];
   {% for data, casos in novosCasos %}
-    datasNovosCasos.push('{{data|date:"d/M/y"}}');
-    valoresNovosCasos.push({{casos}})
+  datasNovosCasos.push('{{data|date:"d/M/y"}}');
+  valoresNovosCasos.push({{ casos }})
   {% endfor %}
 </script>
 <script>
   var ufNovasCasos = [];
   var novosCasosUF = [];
   {% for uf, cases in new_cases_for_state %}
-    ufNovasCasos.push('{{uf}}');
-    novosCasosUF.push({{cases}})
+  ufNovasCasos.push('{{uf}}');
+  novosCasosUF.push({{ cases }})
   {% endfor %}
 </script>
 <script>
   var ufNovasMortes = [];
   var novasMortesUF = [];
   {% for uf, deaths in new_deaths_for_state %}
-    ufNovasMortes.push('{{uf}}')
-    novasMortesUF.push({{deaths}})
+  ufNovasMortes.push('{{uf}}')
+  novasMortesUF.push({{ deaths }})
   {% endfor %}
 </script>
 <script>
   var ufMortes = [];
   var mortesUF = [];
   {% for uf, deaths in deaths_for_state %}
-    ufMortes.push('{{uf}}')
-    mortesUF.push({{deaths}})
+  ufMortes.push('{{uf}}')
+  mortesUF.push({{ deaths }})
   {% endfor %}
 </script>
 {% endblock charts %}
