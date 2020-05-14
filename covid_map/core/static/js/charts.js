@@ -38,21 +38,21 @@ var myChart = new Chart(ctx, {
 });
 
 
-var ctx5 = document.getElementById('historicoMortes').getContext('2d');
-var colorsPrimary5 = []
+var ctx2 = document.getElementById('historicoMortes').getContext('2d');
+var colorsPrimary2 = []
 var colorsBorder2 = []
 datasHistMortes.forEach(element => {
-    colorsPrimary5.push('rgba(244, 67, 54, 0.5)')
+    colorsPrimary2.push('rgba(244, 67, 54, 0.5)')
     colorsBorder2.push('rgba(183, 28, 28, 1)')
 });
-var myChart2 = new Chart(ctx5, {
+var myChart2 = new Chart(ctx2, {
     type: 'line',
     data: {
         labels: datasHistMortes,
         datasets: [{
             label: 'Óbitos',
             data: valoresHistMortes,
-            backgroundColor: colorsPrimary5,
+            backgroundColor: colorsPrimary2,
             borderColor: colorsBorder2,
             borderWidth: 1
         }]
