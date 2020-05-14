@@ -2,6 +2,10 @@
 
 Projeto para criar um site(e possivelmente um aplicativo mobile) para visualizar e monitorar informações diárias dos dados de COVID-19 nos seguintes níveis: Brasil, Piauí e Teresina.
 
+## Acesse o site
+
+- [Clique aqui](https://covid19-map-pi.herokuapp.com/)
+
 ## Tecnologias usadas
 
 * [Django](https://www.djangoproject.com/) - Django framework
