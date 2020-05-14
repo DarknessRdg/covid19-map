@@ -86,7 +86,7 @@ datasNovosCasos.forEach(element => {
     colorsBorder3.push('rgba(181, 14, 14, 1)')
 });
 var myChart3 = new Chart(ctx3, {
-    type: 'line',
+    type: 'bar',
     data: {
         labels: datasNovosCasos,
         datasets: [{
