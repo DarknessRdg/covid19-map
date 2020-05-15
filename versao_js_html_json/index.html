@@ -177,7 +177,7 @@
             let xhr = new XMLHttpRequest();
             var geojson;
 
-            xhr.open('GET', URLS.ibge, true);
+            xhr.open('GET', './malha.geojson', true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4) {
                     if (xhr.status == 200) {
