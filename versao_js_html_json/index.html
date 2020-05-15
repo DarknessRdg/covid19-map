@@ -80,8 +80,6 @@
 
         function getCentroid(feature) {
             let [lng, lat] = feature.properties.centroide;
-            // let codarea = feature.properties.codarea;
-            // return [codarea, lng, lat];
             return [lng, lat];
         }
 
@@ -141,22 +139,6 @@
         xhr2.responseType = 'json';
         xhr2.send();
 
-        ///////////// NOMES ////////////
-        function saveNomes(response) {
-            nomes = response;
-        }
-
-        let xhr3 = new XMLHttpRequest();
-        xhr3.onreadystatechange = function() {
-            if (xhr3.readyState === 4) {
-                saveNomes(xhr3.response);
-            }
-        }
-
-        xhr3.open('GET', './nomes_pi.json', true);
-        xhr3.responseType = 'json';
-        xhr3.send();
-
         function renderMap(malha) {
             if (dados) {
                 geojson = L.geoJSON(malha, {
@@ -179,7 +161,6 @@
         function createMap(response) {
             malha = JSON.parse(response);
             var heatMapDataset = createHeatmapDataset(dados, malha);
-            // var heat = renderHeatMap(heatMapDataset);
             renderMap(malha);
         }
 
@@ -190,8 +171,6 @@
         var osmTiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(covid19Map);
-
-        // L.Control.Layer(osmTiles, heat).addTo(covid19Map);
 
         ///////////// MALHA ///////////////
         function generateMalha() {
@@ -213,7 +192,7 @@
         function createTooltipText(layer) {
             let tooltipText = findMunicipalityInfo(layer.feature.properties.codarea);
             let formattedText =
-                "<strong>" + tooltipText.name + "</strong><br>" +
+                "<strong>" + layer.feature.properties.name + "</strong><br>" +
                 "Confirmados: " + tooltipText.confirmed + "<br>" +
                 "Mortes: " + tooltipText.deaths;
 
@@ -243,26 +222,19 @@
             geojson.resetStyle(e.target);
         }
 
+        // Looks for the number of confirmed cases and of deaths in the 'dados' object
+        // based on the codearea
+        //
+        // The result of this function is an object called 'text' which will be used
+        // as the source of the text of the tooltip of each feature in the map
         function findMunicipalityInfo(codarea) {
             let text = {};
-            if (dados) {
+            if (dados) { // if 'dados' was received from Brasil.io
                 dados.results.find(function(el, i) {
                     if (el.city_ibge_code === codarea) {
                         text = {
-                            name: el.city,
                             confirmed: el.confirmed,
                             deaths: el.deaths
-                        };
-                    }
-                });
-            }
-            if (!text.name) {
-                nomes.find(function(el, i) {
-                    if (el.id === +codarea) {
-                        text = {
-                            name: el.nome,
-                            confirmed: 0,
-                            deaths: 0
                         };
                     }
                 });
@@ -270,6 +242,9 @@
             return text;
         }
 
+        // This functions returns the number of confirmed cases based of the 
+        // feature passed to it
+        //
         // Input: Map feature
         // Output: (number) number of confirmed cases
         function getNumberOfCases(e) {
