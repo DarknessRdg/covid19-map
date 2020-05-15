@@ -239,6 +239,12 @@
                     }
                 });
             }
+            if(!text.confirmed && ! text.deaths) {
+                text = {
+                    confirmed: 0,
+                    deaths: 0
+                }
+            }
             return text;
         }
 
