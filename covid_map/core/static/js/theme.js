@@ -1,5 +1,5 @@
 Highcharts.createElement('link', {
-    href: 'https://fonts.googleapis.com/css?family=Unica+One',
+    href: 'https://fonts.googleapis.com/css2?family=Source+Sans+Pro',
     rel: 'stylesheet',
     type: 'text/css'
 }, null, document.getElementsByTagName('head')[0]);
@@ -15,7 +15,7 @@ Highcharts.theme = {
             ]
         },
         style: {
-            fontFamily: '\'Unica One\', sans-serif'
+            fontFamily: '\'Source Sans Pro\', sans-serif'
         },
         plotBorderColor: '#606063'
     },
