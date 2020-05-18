@@ -1,4 +1,4 @@
-Highcharts.getJSON('https://raw.githubusercontent.com/IFPiaui/covid19-map/master/static_jsons/limites_simplePI.json', function (geojson) {
+Highcharts.getJSON('https://raw.githubusercontent.com/IFPiaui/covid19-map/master/static_jsons/malha.geojson', function (geojson) {
     Highcharts.mapChart('mapaPiaui', {
         chart: {
             map: geojson
@@ -24,8 +24,8 @@ Highcharts.getJSON('https://raw.githubusercontent.com/IFPiaui/covid19-map/master
 
         series: [{
             data: dataMapPiaui,
-            keys: ['id', 'value'],
-            joinBy: 'id',
+            keys: ['codarea', 'value'],
+            joinBy: 'codarea',
             name: 'Confirmados',
             states: {
                 hover: {
