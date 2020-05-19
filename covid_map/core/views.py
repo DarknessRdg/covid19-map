@@ -5,6 +5,7 @@ from datetime import date
 import json
 import requests
 import contextlib
+import csv
 
 
 def soma_obitos_brasil(data_brasil):
@@ -113,6 +114,36 @@ def new_confirmed_for_state():
     url = 'https://brasil.io/api/dataset/covid19/caso_full/data/?format=json&place_type=state&is_last=True'
     return get_request_data_new_cases_for_state(url)
 
+def get_request_data_comorbidades(url):
+    """
+    Carregar o arquivo a apartir da URL e preparar a lista fazendo a iteração nos registros
+    """
+    dados_comorbidades = []
+    response = requests.get(url, stream=True)
+    response.encoding = response.apparent_encoding #definir uft-8
+    registros = csv.reader(response.text.strip().split('\n'))
+    ''' 
+    #Outra forma de obter os registros do arquivo, verificar melhor desempenho
+    arquivo = (line.decode('utf-8') for line in response.iter_lines())
+    registros = csv.reader(arquivo, delimiter=',', quotechar='"', )
+    '''
+    next(registros)
+    for registro in registros:
+        linha = registro[0], registro[1]
+        dados_comorbidades.append(linha)
+
+    return dados_comorbidades
+
+def registros_comorbidades():
+    """
+    Preparação da URL do GoogleDocs que contém todos os dados disponibilizada pela SESAPI
+    Obrigatório setar o identificador da planilha com os dados desejados
+    Ex: planilha=687147050 aponta para os dados de comorbidades
+    """
+    url = 'https://docs.google.com/spreadsheets/d/1b-GkDhhxJIwWcA6tk3z4eX58f-f1w2TA2f2XrI4XB1w/edit#gid={planilha}'
+    url = url.replace('/edit#gid=', '/export?format=csv&gid=').format(planilha=687147050)
+    return get_request_data_comorbidades(url)
+
 
 class Index(TemplateView):
     template_name = 'index.html'
@@ -135,6 +166,7 @@ class Index(TemplateView):
         context['new_cases_for_state'] = new_cases_for_state(data_new_confirmed)
         context['new_deaths_for_state'] = new_deaths_for_state(data_new_confirmed)
         context['deaths_for_state'] = deaths_for_state(data_new_confirmed)
+        context['comorbidades'] = registros_comorbidades()
         return context
 
 

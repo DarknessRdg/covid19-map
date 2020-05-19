@@ -236,3 +236,38 @@ var myChart6 = new Chart(ctx6, {
         }
     }
 });
+
+
+//Construindo o Gŕafico Tipo Pizza: Comorbidades
+var elemento_comorbidades = document.getElementById('comorbidades').getContext('2d');
+var cores = ["#0074d9", "#FF4136", "#2ECC40", "#FF851B", "#7FDBFF", "#B10DC9", "#FFDC00", "#001f3f", "#39CCCC", "#01FF70", "#85144b", "#F012BE", "#3D9970", "#AAAAAA"]
+
+var grafico_comorbidades = new Chart(elemento_comorbidades, {
+    type: 'pie',
+    data: {
+        labels: labels_comorbidades,
+        datasets: [{
+            label: 'Comorbidades',
+            data: num_comorbidades,
+            backgroundColor: cores
+        }]
+    },
+    options: {
+        scales: {
+            xAxes: [{
+                display: false,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'COMORBIDADES APRESENTADAS'
+                }
+            }],
+            yAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'ÍNDICE'
+                }
+            }]
+        }
+    }
+});

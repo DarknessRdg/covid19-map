@@ -163,6 +163,21 @@
       </p>
     </footer>
   </article>
+
+  <article class="card" componente-piaui>
+    <header class="card-cabecalho">
+      <h3 class="card-titulo">Comorbidades</h3>
+    </header>
+    <div class="card-corpo">
+      <canvas id="comorbidades" style="display: block; width: 100px; height: 45px;"></canvas>
+    </div>
+    <footer class="card-rodape">
+      <p>
+        Fonte: SESAPI
+      </p>
+    </footer>
+  </article>
+
 </section>
 
 <footer class="rodape container-centralizado">
@@ -259,6 +274,7 @@
 </footer>
 
 {% endblock content %}
+
 {% block maps %}
 <script>
   var dataMapPiaui = [
@@ -267,6 +283,7 @@
     {% endfor %}
   ];
 </script>
+
 <script>
   var dataMapBrasil = [
     {% for nome, casos in casos_por_estado %}
@@ -275,6 +292,7 @@
   ];
 </script>
 {% endblock maps %}
+
 {% block charts %}
 <script>
   var datasCasos = [];
@@ -322,6 +340,15 @@
   {% for uf, deaths in deaths_for_state %}
   ufMortes.push('{{uf}}')
   mortesUF.push({{ deaths }})
+  {% endfor %}
+</script>
+
+<script>
+  var labels_comorbidades = [];
+  var num_comorbidades = [];
+  {% for comorbidade, quantidade in comorbidades %}
+      labels_comorbidades.push('{{ comorbidade }}')
+      num_comorbidades.push({{ quantidade }})
   {% endfor %}
 </script>
 {% endblock charts %}
