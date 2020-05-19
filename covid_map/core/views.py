@@ -131,8 +131,8 @@ def get_request_data_comorbidades(url):
     for registro in registros:
         linha = registro[0], registro[1]
         dados_comorbidades.append(linha)
-
-    return dados_comorbidades
+    
+    return sorted(dados_comorbidades, key=lambda tup: int(tup[1]), reverse=True)
 
 def registros_comorbidades():
     """
