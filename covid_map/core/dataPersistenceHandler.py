@@ -208,5 +208,3 @@ def checkUpdates():
         return True
     else:
         return False
-
-print(checkUpdates())
