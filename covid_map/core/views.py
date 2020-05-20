@@ -6,7 +6,7 @@ import json
 import requests
 import contextlib
 import csv
-
+from . import dataPersistenceHandler as dph
 
 def soma_obitos_brasil(data_brasil):
     soma = 0 
@@ -146,6 +146,7 @@ def registros_comorbidades():
 
 
 class Index(TemplateView):
+
     template_name = 'index.html'
 
     def get_context_data(self, **kwargs):
@@ -154,6 +155,16 @@ class Index(TemplateView):
         data_brasil_sum = cases_for_state()
         data_new_confirmed = new_confirmed_for_state()
 
+        """
+        DATA PERSISTENCE HANDLER
+        dados_sesapi recebe os dados do JSON recuperados
+        do painel de monitoramento Covid-19 da SESAPI
+        """
+        #atualizado = dph.checkUpdates() FOR TESTING
+        dados_sesapi = dph.loadLocalData()
+        dados_sesapi = dados_sesapi.replace("'", "`")
+
+        # CONTEXT
         context['casos_por_cidades'] = queryset
         context['soma_obitos_por_cidade'] = sum([cidade.obitos for cidade in queryset])
         context['soma_casos_por_cidade'] = sum([cidade.casos for cidade in queryset])
@@ -167,6 +178,8 @@ class Index(TemplateView):
         context['new_deaths_for_state'] = new_deaths_for_state(data_new_confirmed)
         context['deaths_for_state'] = deaths_for_state(data_new_confirmed)
         context['comorbidades'] = registros_comorbidades()
+        context['dados_sesapi'] = dados_sesapi
+        #context['atualizado'] = atualizado
         return context
 
 

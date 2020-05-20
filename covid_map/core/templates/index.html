@@ -267,7 +267,6 @@
           </div>
         </a>
       </div>
-
     </div>
 
   </div>
@@ -282,6 +281,7 @@
   ['{{cidade.idIBGE}}', {{ cidade.casos }}],
     {% endfor %}
   ];
+  var dados_sesapi = JSON.parse('{{ dados_sesapi | safe }}');
 </script>
 
 <script>
