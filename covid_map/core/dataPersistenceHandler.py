@@ -11,7 +11,7 @@ import csv
 import json
 import os
 from datetime import date as dt
-from cepHashMap import *
+from . import cepHashMap
 
 
 ###############################
@@ -90,7 +90,7 @@ def saveData(data, filename='../data/1970-01-01.json'):
 
 def loadLocalData():
     ld = os.listdir('data/')
-    fileName = ld[0]
+    fileName = ld[len(ld)-1]
     arquivo = open('data/' + fileName, 'r')
     data = arquivo.read()
     arquivo.close()

@@ -162,6 +162,7 @@ class Index(TemplateView):
         """
         #atualizado = dph.checkUpdates() FOR TESTING
         dados_sesapi = dph.loadLocalData()
+        dados_sesapi = dados_sesapi.replace("'", "`")
 
         # CONTEXT
         context['casos_por_cidades'] = queryset
