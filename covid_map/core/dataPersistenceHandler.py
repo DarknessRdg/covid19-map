@@ -11,8 +11,21 @@ import csv
 import json
 import os
 from datetime import date as dt
-from cepHashMap import cepHashMap
+from . import cepHashMap
 
+from urllib import request
+import csv
+import json
+import os
+from datetime import date as dt
+from . import cepHashMap
+
+##############################
+# INSERT PATH DIR
+###
+
+script_path = os.path.dirname(os.path.realpath(__file__))
+data_path = os.path.join(script_path, "data")
 
 ###############################
 # INSERT CODE AREA (IBGE)
@@ -136,9 +149,9 @@ def saveData(data, filename='../data/1970-01-01.json'):
 
 
 def loadLocalData():
-    ld = os.listdir('data/')
+    ld = os.listdir(data_path)
     fileName = ld[len(ld)-1]
-    arquivo = open('data/' + fileName, 'r')
+    arquivo = open(data_path + '/' + fileName, 'r')
     data = arquivo.read()
     arquivo.close()
     return data
@@ -181,7 +194,7 @@ def checkUpdates():
     # comparar com a data representada pelo nome do arquivo local
     # descobrir qual a data representada pelo nome do arquivo local
     # localizar arquivo local e ler o seu nome
-    ld = os.listdir('data/')
+    ld = os.listdir(data_path)
     fileName = ld[len(ld)-1]
     dateOfFile = fileName[0:10]
     localFileCreationDate = dt.fromisoformat(dateOfFile)
