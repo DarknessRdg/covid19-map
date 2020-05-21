@@ -13,13 +13,6 @@ import os
 from datetime import date as dt
 from . import cepHashMap
 
-from urllib import request
-import csv
-import json
-import os
-from datetime import date as dt
-from . import cepHashMap
-
 ##############################
 # INSERT PATH DIR
 ###

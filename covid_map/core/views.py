@@ -131,8 +131,8 @@ def get_request_data_comorbidades(url):
     for registro in registros:
         linha = registro[0], registro[1]
         dados_comorbidades.append(linha)
-
-    return dados_comorbidades
+    
+    return sorted(dados_comorbidades, key=lambda tup: int(tup[1]), reverse=True)
 
 def registros_comorbidades():
     """
@@ -181,22 +181,3 @@ class Index(TemplateView):
         context['dados_sesapi'] = dados_sesapi
         #context['atualizado'] = atualizado
         return context
-
-
-class Upload(TemplateView):
-    template_name = 'importar_csv.html'
-
-    def post(self, request):
-        file = request.FILES['arquivo'].read().decode('utf-8')
-        cidades = file.replace('\r', '').split('\n')
-        book = []
-        for linha in cidades:
-            with contextlib.suppress(ValueError):
-                nome, idibge, casos, mortes = linha.split(',')
-                book.append(CasosPorCidadePiaui(name=nome, idIBGE=idibge, casos=casos, obitos=mortes))
-
-        if CasosPorCidadePiaui.objects.all().count() == 0:
-            CasosPorCidadePiaui.objects.bulk_create(book)
-        else:
-            CasosPorCidadePiaui.objects.bulk_update(book, fields=['casos', 'obitos'])
-        return redirect('index')

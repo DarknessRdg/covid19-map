@@ -126,6 +126,22 @@ button {
   margin: 8px;
 }
 
+.card-mapa {
+  min-width: 200px;
+  max-height: 1000px;
+  margin-top: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+}
+
+#mapaPiaui {
+  height: 800px;
+}
+
+#mapaBrasil {
+  height: 800px;
+}
+
 .card {
   min-width: 200px;
   max-height: 600px;
@@ -305,6 +321,18 @@ footer.rodape {
 
   .grupo-aba {
     max-height: 20%;
+  }
+
+  .card-mapa {
+    max-height: 600px;
+  }
+
+  #mapaPiaui {
+    height: 500px;
+  }
+
+  #mapaBrasil {
+    height: 500px;
   }
 }
 
