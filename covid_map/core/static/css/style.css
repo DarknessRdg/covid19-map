@@ -134,15 +134,7 @@ button {
   border-radius: 6px;
 }
 
-#mapaPiauiMortes {
-  height: 800px;
-}
-
-#mapaPiauiConfirmados {
-  height: 800px;
-}
-
-#mapaBrasil {
+.mapa {
   height: 800px;
 }
 
@@ -331,15 +323,7 @@ footer.rodape {
     max-height: 600px;
   }
 
-  #mapaPiauiMortes {
-    height: 500px;
-  }
-  
-  #mapaPiauiConfirmados {
-    height: 500px;
-  }
-
-  #mapaBrasil {
+  .mapa {
     height: 500px;
   }
 }
