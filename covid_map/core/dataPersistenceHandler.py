@@ -11,8 +11,7 @@ import csv
 import json
 import os
 from datetime import date as dt
-from . import cepHashMap
-
+from .cepHashMap import cepHashMap
 ##############################
 # INSERT PATH DIR
 ###

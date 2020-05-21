@@ -7,7 +7,7 @@ dados_sesapi.forEach(element => {
 
 
 Highcharts.getJSON('https://raw.githubusercontent.com/IFPiaui/covid19-map/master/static_jsons/malha.geojson', function (geojson) {
-    Highcharts.mapChart('mapaPiauiConfimados', {
+    Highcharts.mapChart('mapaPiauiConfirmados', {
         chart: {
             map: geojson
         },
