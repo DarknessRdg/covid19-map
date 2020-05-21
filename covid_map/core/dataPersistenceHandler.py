@@ -28,9 +28,66 @@ def getCodareaFromHashMap(cep):
     codarea = cepHashMap[cep]['codigo_ibge']
     return codarea
 
+
+def beautifyHeaderItem(item):
+    """
+    "Traduz" os nomes dos itens de cabeçalho dos dados 
+        da SESAPI para nomes mais adequados.
+    """
+    hashMapNomesDasVariaveis = {
+        # "id": "1", "Município": "AGUA BRANCA", "Confirmados": "40",
+        # "Óbitos": "5", "Incidência": "22,97", "População": "17411",
+        # "CEP": "64460000"
+        "id": "id",
+        "Município": "city",
+        "Confirmados": "confirmed",
+        "Óbitos": "deaths",
+        "Incidência": "incidence",
+        "População": "population",
+        "CEP": "cep"
+    }
+
+    return hashMapNomesDasVariaveis[item]
+
+def uglifyHeaderItem(item):
+    """
+    "Traduz" os nomes dos itens de cabeçalho dos nosso dados 
+        para os dados da SESAPI.
+    """
+    hashMapNomesDasVariaveis = {
+        # "id": "1", "Município": "AGUA BRANCA", "Confirmados": "40",
+        # "Óbitos": "5", "Incidência": "22,97", "População": "17411",
+        # "CEP": "64460000"
+        "id": "id",
+        "city": "Município",
+        "confirmed": "Confirmados",
+        "deaths": "Óbitos",
+        "incidence": "Incidência",
+        "population": "População",
+        "cep": "CEP"
+    }
+
+    return hashMapNomesDasVariaveis[item]
+
+def createEmptyCityInfoDictionary():
+    emptyCityDictionaries = {}
+    for cep in cepHashMap:
+        city = {}
+        city['city'] = cepHashMap[cep]['nome']
+        city['confirmed'] = 0
+        city['deaths'] = 0
+        city['incidence'] = 0
+        city['population'] = None
+        city['cep'] = cep
+        city['codigo_ibge'] = cepHashMap[cep]['codigo_ibge']
+        emptyCityDictionaries[cep] = city
+
+    return emptyCityDictionaries
+
 ###############################
 # FETCH
 ###
+
 
 def fetchData():
     # URL do Google Spreadsheet do Painel Epidemiológico da Covid-19 - SESAPI
@@ -46,31 +103,21 @@ def fetchData():
     dic_DadosPorMunicipio = csv.DictReader(dadosDecodificados)
     cabecalhoDaTabela = dic_DadosPorMunicipio.fieldnames
 
+    emptyCityDictionaries = createEmptyCityInfoDictionary()
     dadosDeTodasAsCidades = []
-
-    hashMapNomesDasVariaveis = {
-        #"id": "1", "Município": "AGUA BRANCA", "Confirmados": "40", 
-        # "Óbitos": "5", "Incidência": "22,97", "População": "17411", 
-        # "CEP": "64460000"
-        "id": "id",
-        "Município": "city",
-        "Confirmados": "confirmed",
-        "Óbitos": "deaths",
-        "Incidência": "incidence",
-        "População": "population",
-        "CEP": "cep"
-    }
 
     # Transformar os dados em CSV em dados em JSON
     for municipio in dic_DadosPorMunicipio:
-        dadosDoMunicipio = {}
+        # vou iterando. Para cada registro, atualizo o registro correspondente em
+        # emptyCityDictionaries para os valores de incidencia, obitos, confirmados, populacao
+        if municipio[uglifyHeaderItem('city')] == "PIAUÍ": break
         cep = municipio['CEP']
-        for item in cabecalhoDaTabela:
-            dadosDoMunicipio[hashMapNomesDasVariaveis[item]] = municipio[item]
-        if municipio['Município'] != 'PIAUÍ': 
-            dadosDoMunicipio['codigo_ibge'] = getCodareaFromHashMap(cep)
-            dadosDoMunicipio['city'] = cepHashMap[cep]['nome']
-        dadosDeTodasAsCidades.append(dadosDoMunicipio)
+        for item in municipio.keys():
+            if item in ['Confirmados', 'Óbitos', 'Incidência', 'População']:
+                emptyCityDictionaries.get(cep)[beautifyHeaderItem(item)] = municipio[item]
+        
+    for item in emptyCityDictionaries.values():
+        dadosDeTodasAsCidades.append(item)
 
     jsonFinal = json.dumps(dadosDeTodasAsCidades, ensure_ascii=False)
 
