@@ -197,7 +197,7 @@ def checkUpdates():
     # comparar lastUpdate com o nome do arquivo local
     if (localFileCreationDate - lastUpdate).days != 0:
         data = fetchData()
-        saveData(data, 'data/' + isoFormattedDate + '.json')
+        saveData(data, data_path + '/' + isoFormattedDate + '.json')
         return True
     else:
         return False

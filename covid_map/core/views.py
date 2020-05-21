@@ -160,7 +160,7 @@ class Index(TemplateView):
         dados_sesapi recebe os dados do JSON recuperados
         do painel de monitoramento Covid-19 da SESAPI
         """
-        #atualizado = dph.checkUpdates() FOR TESTING
+        #atualizado = dph.checkUpdates() #FOR TESTING
         dados_sesapi = dph.loadLocalData()
         dados_sesapi = dados_sesapi.replace("'", "`")
 
