@@ -8,6 +8,17 @@ import contextlib
 import csv
 from . import dataPersistenceHandler as dph
 
+def soma_obitos_piaui(dados_sesapi):
+    for cidade in list(reversed(json.loads(dados_sesapi))):
+        if cidade['city'] == 'PIAUÍ': 
+            return cidade['deaths']
+
+def soma_casos_piaui(dados_sesapi):
+    for cidade in list(reversed(json.loads(dados_sesapi))):
+        if cidade['city'] == 'PIAUÍ': 
+            return cidade['confirmed']
+
+
 def soma_obitos_brasil(data_brasil):
     soma = 0 
     for state in data_brasil:
@@ -166,8 +177,8 @@ class Index(TemplateView):
         
         # CONTEXT
         context['casos_por_cidades'] = queryset
-        context['soma_obitos_por_cidade'] = [int(cidade['deaths']) for cidade in json.loads(dados_sesapi)]
-        context['soma_casos_por_cidade'] = sum([int(cidade['confirmed']) for cidade in json.loads(dados_sesapi)])
+        context['soma_obitos_por_cidade'] = soma_obitos_piaui(dados_sesapi)
+        context['soma_casos_por_cidade'] = soma_casos_piaui(dados_sesapi)
         context['casosConfirmados'] = casos_confirmados()
         context['historicoMortes'] = historico_mortes()
         context['novosCasos'] = novos_casos()

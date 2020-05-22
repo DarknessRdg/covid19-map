@@ -109,7 +109,14 @@ def fetchData():
     for municipio in dic_DadosPorMunicipio:
         # vou iterando. Para cada registro, atualizo o registro correspondente em
         # emptyCityDictionaries para os valores de incidencia, obitos, confirmados, populacao
-        if municipio[uglifyHeaderItem('city')] == "PIAUÍ": break
+        if municipio[uglifyHeaderItem('city')] == "PIAUÍ":
+            piaui = {"city": municipio[uglifyHeaderItem('city')], 
+                    "confirmed": municipio[uglifyHeaderItem('confirmed')], 
+                    "deaths": municipio[uglifyHeaderItem('deaths')], 
+                    "incidence": municipio[uglifyHeaderItem('incidence')],
+                    "population": municipio[uglifyHeaderItem('population')]
+            }
+            break
         cep = municipio['CEP']
         for item in municipio.keys():
             if item in ['Confirmados', 'Óbitos', 'Incidência', 'População']:
@@ -117,6 +124,7 @@ def fetchData():
         
     for item in emptyCityDictionaries.values():
         dadosDeTodasAsCidades.append(item)
+    dadosDeTodasAsCidades.append(piaui)
 
     jsonFinal = json.dumps(dadosDeTodasAsCidades, ensure_ascii=False)
 
@@ -142,7 +150,8 @@ def saveData(data, filename='../data/1970-01-01.json'):
 
 def loadLocalData():
     ld = os.listdir(data_path)
-    fileName = ld[len(ld)-1]
+    lista_de_datas = [dt.fromisoformat(arquivo.replace('.json', '')) for arquivo in os.listdir(data_path)]
+    fileName = max(lista_de_datas).isoformat() + '.json' 
     arquivo = open(data_path + '/' + fileName, 'r')
     data = arquivo.read()
     arquivo.close()

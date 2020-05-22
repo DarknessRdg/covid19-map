@@ -1,8 +1,10 @@
 dataMapPiauiConfimados = []
 dataMapPiauiMortes = []
 dados_sesapi.forEach(element => {
-    dataMapPiauiConfimados.push([element.codigo_ibge, parseInt(element.confirmed)])
-    dataMapPiauiMortes.push([element.codigo_ibge, parseInt(element.deaths)])
+    if (element.city != 'PIAUÍ'){
+        dataMapPiauiConfimados.push([element.codigo_ibge, parseInt(element.confirmed)])
+        dataMapPiauiMortes.push([element.codigo_ibge, parseInt(element.deaths)])
+    }
 });
 
 
