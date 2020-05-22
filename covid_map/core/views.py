@@ -1,7 +1,7 @@
 from django.shortcuts import redirect
 from django.views.generic import TemplateView
 from .models import CasosPorCidadePiaui
-from datetime import date
+from datetime import date, datetime
 import json
 import requests
 import contextlib
@@ -163,11 +163,11 @@ class Index(TemplateView):
         atualizado = dph.checkUpdates() #FOR TESTING
         dados_sesapi = dph.loadLocalData()
         dados_sesapi = dados_sesapi.replace("'", "`")
-
+        
         # CONTEXT
         context['casos_por_cidades'] = queryset
-        context['soma_obitos_por_cidade'] = sum([cidade.obitos for cidade in queryset])
-        context['soma_casos_por_cidade'] = sum([cidade.casos for cidade in queryset])
+        context['soma_obitos_por_cidade'] = [int(cidade['deaths']) for cidade in json.loads(dados_sesapi)]
+        context['soma_casos_por_cidade'] = sum([int(cidade['confirmed']) for cidade in json.loads(dados_sesapi)])
         context['casosConfirmados'] = casos_confirmados()
         context['historicoMortes'] = historico_mortes()
         context['novosCasos'] = novos_casos()

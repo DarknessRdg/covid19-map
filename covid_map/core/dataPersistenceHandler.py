@@ -186,10 +186,10 @@ def checkUpdates():
     # comparar com a data representada pelo nome do arquivo local
     # descobrir qual a data representada pelo nome do arquivo local
     # localizar arquivo local e ler o seu nome
-    ld = os.listdir(data_path)
-    fileName = ld[len(ld)-1]
-    dateOfFile = fileName[0:10]
-    localFileCreationDate = dt.fromisoformat(dateOfFile)
+    lista_de_datas = [dt.fromisoformat(arquivo.replace('.json', '')) for arquivo in os.listdir(data_path)]
+    # Pegando a maior data 
+    
+    localFileCreationDate = max(lista_de_datas)
 
     # transformar essa informação em uma data
     # se o lastUpdate for maior que o arquivo local, atualiza
