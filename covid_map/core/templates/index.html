@@ -2,8 +2,9 @@
 {% block content %}
 
 <header class="cabecalho">
+
   <div class="container-centralizado conteudo-cabecalho">
-    <h2><map></map> COVID-19</h2>
+    <h2>COVID-19</h2>
     <div class="secao-menu">
       <div class="menu-toggle">
         <div class="one"></div>
@@ -24,36 +25,58 @@
       </nav>
     </div>
   </div>
+
 </header>
 
 <section class="container-centralizado container-cards-dados">
-  <article class="card-dados" componente-brasil>
+
+  <div class="card-dados" componente-brasil>
     <h3>Casos Confirmados</h3>
     <h2 class="texto-verde">{{soma_casos_brasil}}</h2>
     <div class="barrinha-horizontal bg-verde"></div>
-  </article>
+  </div>
 
-  <article class="card-dados" componente-brasil>
+  <div class="card-dados" componente-brasil>
     <h3>Óbitos</h3>
     <h2 class="texto-vermelho">{{soma_obitos_brasil}}</h2>
     <div class="barrinha-horizontal bg-vermelho"></div>
-  </article>
+  </div>
 
-  <article class="card-dados" componente-piaui>
+  <div class="card-dados" componente-piaui>
     <h3>Casos Confirmados</h3>
     <h2 class="texto-verde">{{soma_casos_por_cidade}}</h2>
     <div class="barrinha-horizontal bg-verde"></div>
-  </article>
+  </div>
 
-  <article class="card-dados" componente-piaui>
+  <div class="card-dados" componente-piaui>
     <h3>Óbitos</h3>
     <h2 class="texto-vermelho">{{soma_obitos_por_cidade}}</h2>
     <div class="barrinha-horizontal bg-vermelho"></div>
-  </article>
+  </div>
+
 </section>
 
-<main class="container-centralizado">
-  <article class="card-mapa" componente-brasil>
+<section id="container-mapas" class="container-centralizado">
+
+  <div class="selecao-abas" componente-piaui>
+    <h3>Opções de Mapa</h3>
+    <div class="abas">
+      <div class="grupo-aba">
+        <button id="aba-mapa-pi-confirmados" class="botao-aba">
+          <p>Confirmados</p>
+        </button>
+        <div class="barrinha-horizontal bg-verde"></div>
+      </div>
+      <div class="grupo-aba">
+        <button id="aba-mapa-pi-obitos" class="botao-aba">
+          <p>Óbitos</p>
+        </button>
+        <div class="barrinha-horizontal bg-vermelho" style="display: none;"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-mapa" componente-brasil>
     <header class="card-cabecalho">
       <h3 class="card-titulo">Mapa de casos confirmados</h3>
     </header>
@@ -63,9 +86,9 @@
         Highcharts
       </p>
     </footer>
-  </article>
+  </div>
 
-  <article class="card-mapa" componente-piaui>
+  <div id="mapa-pi-confirmados" class="card-mapa" componente-piaui>
     <header class="card-cabecalho">
       <h3 class="card-titulo">Mapa de casos confirmados</h3>
     </header>
@@ -75,9 +98,9 @@
         Highcharts
       </p>
     </footer>
-  </article>
+  </div>
 
-  <article class="card-mapa" componente-piaui>
+  <div id="mapa-pi-obitos" class="card-mapa" componente-piaui>
     <header class="card-cabecalho">
       <h3 class="card-titulo">Mapa de óbitos</h3>
     </header>
@@ -87,12 +110,67 @@
         Highcharts
       </p>
     </footer>
-  </article>
-</main>
+  </div>
+</section>
 
-<section class="container-centralizado">
+<section id="container-graficos" class="container-centralizado">
 
-  <article class="card" componente-brasil>
+  <div class="selecao-abas" componente-piaui>
+    <h3>Opções de Gráficos</h3>
+    <div class="abas">
+      <div class="grupo-aba">
+        <button id="aba-grafico-pi-confirmados" class="botao-aba">
+          <p>Confirmados</p>
+        </button>
+        <div class="barrinha-horizontal bg-verde"></div>
+      </div>
+      <div class="grupo-aba">
+        <button id="aba-grafico-pi-obitos" class="botao-aba">
+          <p>Óbitos</p>
+        </button>
+        <div class="barrinha-horizontal bg-vermelho" style="display: none;"></div>
+      </div>
+      <div class="grupo-aba">
+        <button id="aba-grafico-pi-novos-casos" class="botao-aba">
+          <p>Novos Casos</p>
+        </button>
+        <div class="barrinha-horizontal bg-roxo" style="display: none;"></div>
+      </div>
+      <div class="grupo-aba">
+        <button id="aba-grafico-pi-doencas" class="botao-aba">
+          <p>Doenças</p>
+        </button>
+        <div class="barrinha-horizontal bg-cinza" style="display: none;"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="selecao-abas" componente-brasil>
+    <h3>Opções de Gráficos</h3>
+    <div class="abas">
+      <div class="grupo-aba">
+        <button id="aba-grafico-br-confirmados" class="botao-aba">
+          <p>Confirmados</p>
+        </button>
+        <div class="barrinha-horizontal bg-verde"></div>
+      </div>
+      <div class="grupo-aba">
+        <button id="aba-grafico-br-obitos-acumulados" class="botao-aba">
+          <p>Óbitos Acumulados</p>
+        </button>
+        <div class="barrinha-horizontal bg-vermelho" style="display: none;"></div>
+      </div>
+      <div class="grupo-aba">
+        <button id="aba-grafico-br-novos-obitos" class="botao-aba">
+          <p>Novos Óbitos</p>
+        </button>
+        <div class="barrinha-horizontal bg-roxo" style="display: none;"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="grafico-br-obitos-acumulados" class="card" 
+    style="display: none;" componente-brasil>
     <header class="card-cabecalho">
       <h3 class="card-titulo">Óbitos acumulados de COVID-19 por data de notificação</h3>
     </header>
@@ -104,9 +182,9 @@
         Fonte: Brasil.io
       </p>
     </footer>
-  </article>
+  </div>
 
-  <article class="card" componente-brasil>
+  <div id="grafico-br-confirmados" class="card" componente-brasil>
     <header class="card-cabecalho">
       <h3 class="card-titulo">Casos novos de COVID-19 por data de notificação</h3>
     </header>
@@ -118,9 +196,9 @@
         Fonte: Brasil.io
       </p>
     </footer>
-  </article>
+  </div>
 
-  <article class="card" componente-brasil>
+  <div id="grafico-br-novos-obitos" class="card" style="display: none;" componente-brasil>
     <header class="card-cabecalho">
       <h3 class="card-titulo">Novos óbitos de COVID-19 por data de notificação</h3>
     </header>
@@ -132,9 +210,9 @@
         Fonte: Brasil.io
       </p>
     </footer>
-  </article>
+  </div>
 
-  <article class="card" componente-piaui>
+  <div id="grafico-pi-confirmados" class="card" componente-piaui>
     <header class="card-cabecalho">
       <h3 class="card-titulo">Casos acumulados de COVID-19 por data de notificação</h3>
     </header>
@@ -146,9 +224,9 @@
         Fonte: Brasil.io
       </p>
     </footer>
-  </article>
+  </div>
 
-  <article class="card" componente-piaui>
+  <div id="grafico-pi-obitos" class="card" style="display: none;" componente-piaui>
     <header class="card-cabecalho">
       <h3 class="card-titulo">Óbitos acumulados de COVID-19 por data de notificação</h3>
     </header>
@@ -160,9 +238,9 @@
         Fonte: Brasil.io
       </p>
     </footer>
-  </article>
+  </div>
 
-  <article class="card" componente-piaui>
+  <div id="grafico-pi-novos-casos" class="card" style="display: none;" componente-piaui>
     <header class="card-cabecalho">
       <h3 class="card-titulo">Casos novos de COVID-19 por data de notificação</h3>
     </header>
@@ -174,9 +252,9 @@
         Fonte: Brasil.io
       </p>
     </footer>
-  </article>
+  </div>
 
-  <article class="card" componente-piaui>
+  <div id="grafico-pi-doencas" class="card" style="display: none;" componente-piaui>
     <header class="card-cabecalho">
       <h3 class="card-titulo">Histórico de doenças em pacientes falecidos</h3>
     </header>
@@ -188,7 +266,7 @@
         Fonte: SESAPI
       </p>
     </footer>
-  </article>
+  </div>
 
 </section>
 

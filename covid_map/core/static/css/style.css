@@ -5,6 +5,8 @@
   --preto: #212121;
   --verde: #009688;
   --vermelho: #f44336;
+  --roxo: #673ab7;
+  --cinza: #424242;
 }
 
 * {
@@ -37,6 +39,14 @@ button {
 
 .bg-vermelho {
   background-color: var(--vermelho);
+}
+
+.bg-roxo {
+  background-color: var(--roxo);
+}
+
+.bg-cinza {
+  background-color: var(--cinza);
 }
 
 .texto-verde {
@@ -124,6 +134,35 @@ button {
   padding: 10px;
   border-radius: 8px;
   margin: 8px;
+}
+
+.selecao-abas {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.selecao-abas h3 {
+  padding-left: 8px;
+}
+
+.abas {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.abas .grupo-aba {
+  margin: 8px;
+}
+
+.botao-aba {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 18px;
+  padding: 10px 15px;
+  background-color: transparent;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .card-mapa {
@@ -243,6 +282,10 @@ footer.rodape {
 }
 
 [componente-brasil] {
+  display: none;
+}
+
+#mapa-pi-obitos {
   display: none;
 }
 
