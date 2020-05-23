@@ -281,14 +281,6 @@ footer.rodape {
   justify-content: space-between;
 }
 
-[componente-brasil] {
-  display: none;
-}
-
-#mapa-pi-obitos {
-  display: none;
-}
-
 @media (max-width: 630px) {
   nav {
     display: none;
