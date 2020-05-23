@@ -15,11 +15,11 @@
         <ul>
           <div class="grupo-aba">
             <button id="aba-piaui" class="botao-cabecalho">Piauí</button>
-            <div id="barra-piaui" class="barrinha-horizontal bg-verde"></div>
+            <div class="barrinha-horizontal bg-verde"></div>
           </div>
           <div class="grupo-aba">
             <button id="aba-brasil" class="botao-cabecalho">Brasil</button>
-            <div id="barra-brasil" class="barrinha-horizontal bg-verde"></div>
+            <div class="barrinha-horizontal bg-verde" style="display: none;"></div>
           </div>
         </ul>
       </nav>
@@ -30,25 +30,25 @@
 
 <section class="container-centralizado container-cards-dados">
 
-  <div class="card-dados" componente-brasil>
+  <div class="card-dados" componente-brasil default>
     <h3>Casos Confirmados</h3>
     <h2 class="texto-verde">{{soma_casos_brasil}}</h2>
     <div class="barrinha-horizontal bg-verde"></div>
   </div>
 
-  <div class="card-dados" componente-brasil>
+  <div class="card-dados" componente-brasil default>
     <h3>Óbitos</h3>
     <h2 class="texto-vermelho">{{soma_obitos_brasil}}</h2>
     <div class="barrinha-horizontal bg-vermelho"></div>
   </div>
 
-  <div class="card-dados" componente-piaui>
+  <div class="card-dados" componente-piaui default>
     <h3>Casos Confirmados</h3>
     <h2 class="texto-verde">{{soma_casos_por_cidade}}</h2>
     <div class="barrinha-horizontal bg-verde"></div>
   </div>
 
-  <div class="card-dados" componente-piaui>
+  <div class="card-dados" componente-piaui default>
     <h3>Óbitos</h3>
     <h2 class="texto-vermelho">{{soma_obitos_por_cidade}}</h2>
     <div class="barrinha-horizontal bg-vermelho"></div>
@@ -58,7 +58,7 @@
 
 <section id="container-mapas" class="container-centralizado">
 
-  <div class="selecao-abas" componente-piaui>
+  <div class="selecao-abas" componente-piaui default>
     <h3>Opções de Mapa</h3>
     <div class="abas">
       <div class="grupo-aba">
@@ -76,7 +76,7 @@
     </div>
   </div>
 
-  <div class="card-mapa" componente-brasil>
+  <div class="card-mapa" componente-brasil default>
     <header class="card-cabecalho">
       <h3 class="card-titulo">Mapa de casos confirmados</h3>
     </header>
@@ -88,7 +88,7 @@
     </footer>
   </div>
 
-  <div id="mapa-pi-confirmados" class="card-mapa" componente-piaui>
+  <div id="mapa-pi-confirmados" class="card-mapa" componente-piaui default>
     <header class="card-cabecalho">
       <h3 class="card-titulo">Mapa de casos confirmados</h3>
     </header>
@@ -115,7 +115,7 @@
 
 <section id="container-graficos" class="container-centralizado">
 
-  <div class="selecao-abas" componente-piaui>
+  <div class="selecao-abas" componente-piaui default>
     <h3>Opções de Gráficos</h3>
     <div class="abas">
       <div class="grupo-aba">
@@ -145,7 +145,7 @@
     </div>
   </div>
 
-  <div class="selecao-abas" componente-brasil>
+  <div class="selecao-abas" componente-brasil default>
     <h3>Opções de Gráficos</h3>
     <div class="abas">
       <div class="grupo-aba">
@@ -169,8 +169,7 @@
     </div>
   </div>
 
-  <div id="grafico-br-obitos-acumulados" class="card" 
-    style="display: none;" componente-brasil>
+  <div id="grafico-br-obitos-acumulados" class="card" componente-brasil>
     <header class="card-cabecalho">
       <h3 class="card-titulo">Óbitos acumulados de COVID-19 por data de notificação</h3>
     </header>
@@ -184,7 +183,7 @@
     </footer>
   </div>
 
-  <div id="grafico-br-confirmados" class="card" componente-brasil>
+  <div id="grafico-br-confirmados" class="card" componente-brasil default>
     <header class="card-cabecalho">
       <h3 class="card-titulo">Casos novos de COVID-19 por data de notificação</h3>
     </header>
@@ -198,7 +197,7 @@
     </footer>
   </div>
 
-  <div id="grafico-br-novos-obitos" class="card" style="display: none;" componente-brasil>
+  <div id="grafico-br-novos-obitos" class="card" componente-brasil>
     <header class="card-cabecalho">
       <h3 class="card-titulo">Novos óbitos de COVID-19 por data de notificação</h3>
     </header>
@@ -212,7 +211,7 @@
     </footer>
   </div>
 
-  <div id="grafico-pi-confirmados" class="card" componente-piaui>
+  <div id="grafico-pi-confirmados" class="card" componente-piaui default>
     <header class="card-cabecalho">
       <h3 class="card-titulo">Casos acumulados de COVID-19 por data de notificação</h3>
     </header>
@@ -226,7 +225,7 @@
     </footer>
   </div>
 
-  <div id="grafico-pi-obitos" class="card" style="display: none;" componente-piaui>
+  <div id="grafico-pi-obitos" class="card" componente-piaui>
     <header class="card-cabecalho">
       <h3 class="card-titulo">Óbitos acumulados de COVID-19 por data de notificação</h3>
     </header>
@@ -240,7 +239,7 @@
     </footer>
   </div>
 
-  <div id="grafico-pi-novos-casos" class="card" style="display: none;" componente-piaui>
+  <div id="grafico-pi-novos-casos" class="card" componente-piaui>
     <header class="card-cabecalho">
       <h3 class="card-titulo">Casos novos de COVID-19 por data de notificação</h3>
     </header>
@@ -254,7 +253,7 @@
     </footer>
   </div>
 
-  <div id="grafico-pi-doencas" class="card" style="display: none;" componente-piaui>
+  <div id="grafico-pi-doencas" class="card" componente-piaui>
     <header class="card-cabecalho">
       <h3 class="card-titulo">Histórico de doenças em pacientes falecidos</h3>
     </header>
@@ -437,8 +436,8 @@
   var labels_comorbidades = [];
   var num_comorbidades = [];
   {% for comorbidade, quantidade in comorbidades %}
-      labels_comorbidades.push('{{ comorbidade }}')
-      num_comorbidades.push({{ quantidade }})
+  labels_comorbidades.push('{{ comorbidade }}')
+  num_comorbidades.push({{ quantidade }})
   {% endfor %}
 </script>
 {% endblock charts %}
