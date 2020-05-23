@@ -19,6 +19,18 @@ def soma_casos_piaui(dados_sesapi):
             return cidade['confirmed']
 
 
+def soma_descartados_piaui(dados_sesapi):
+    for cidade in list(reversed(json.loads(dados_sesapi))):
+        if cidade['city'] == 'PIAUÍ': 
+            return cidade['discards']
+
+
+def soma_altas_piaui(dados_sesapi):
+    for cidade in list(reversed(json.loads(dados_sesapi))):
+        if cidade['city'] == 'PIAUÍ': 
+            return cidade['cured']
+
+
 def soma_obitos_brasil(data_brasil):
     soma = 0 
     for state in data_brasil:
@@ -179,6 +191,8 @@ class Index(TemplateView):
         context['casos_por_cidades'] = queryset
         context['soma_obitos_por_cidade'] = soma_obitos_piaui(dados_sesapi)
         context['soma_casos_por_cidade'] = soma_casos_piaui(dados_sesapi)
+        context['soma_altas_piaui'] = soma_altas_piaui(dados_sesapi)
+        context['soma_descartados_piaui'] = soma_descartados_piaui(dados_sesapi)
         context['casosConfirmados'] = casos_confirmados()
         context['historicoMortes'] = historico_mortes()
         context['novosCasos'] = novos_casos()
