@@ -3,7 +3,7 @@
 """
 Created on Mon May 18 17:57:05 2020
 
-@author: romulobarros
+@author: romulobarros and LuisHenrique01
 """
 
 from urllib import request
@@ -22,6 +22,21 @@ data_path = os.path.join(script_path, "data")
 ###############################
 # INSERT CODE AREA (IBGE)
 ###
+
+def get_dict_dados(id_, url='https://docs.google.com/spreadsheets/d/1b-GkDhhxJIwWcA6tk3z4eX58f-f1w2TA2f2XrI4XB1w/export?format=csv&gid='):
+    # URL do Google Spreadsheet do Painel Epidemiológico da Covid-19 - SESAPI
+    dadosDaPagina = request.urlopen(url+id_) # 532454257 é o ID da base de dados 
+
+    # Os dados obtidos através do urllib vêm no formato bytes.
+    # Portanto, precisamos transformá-los em caracteres utf-8
+    dadosDecodificados = []
+    for row in dadosDaPagina:
+        dadosDecodificados.append(row.decode('utf-8'))
+
+    dic_Dados = csv.DictReader(dadosDecodificados)
+    cabecalhoDaTabela = dic_Dados.fieldnames
+    return cabecalhoDaTabela, dic_Dados
+
 
 def getCodareaFromHashMap(cep):
     codarea = cepHashMap[cep]['codigo_ibge']
@@ -89,22 +104,14 @@ def createEmptyCityInfoDictionary():
 
 
 def fetchData():
-    # URL do Google Spreadsheet do Painel Epidemiológico da Covid-19 - SESAPI
-    url = 'https://docs.google.com/spreadsheets/d/1b-GkDhhxJIwWcA6tk3z4eX58f-f1w2TA2f2XrI4XB1w/export?format=csv&gid=532454257'
-    dadosDaPagina = request.urlopen(url)
-
-    # Os dados obtidos através do urllib vêm no formato bytes.
-    # Portanto, precisamos transformá-los em caracteres utf-8
-    dadosDecodificados = []
-    for row in dadosDaPagina:
-        dadosDecodificados.append(row.decode('utf-8'))
-
-    dic_DadosPorMunicipio = csv.DictReader(dadosDecodificados)
-    cabecalhoDaTabela = dic_DadosPorMunicipio.fieldnames
+    
+    cabecalhoDaTabelaMunicipios, dic_DadosPorMunicipio = get_dict_dados(id_='532454257')
+    cabecalhoDaTabelaDescartados, dic_Descartados = get_dict_dados(id_='1183637221')
+    cabecalhoDaTabelaAltas, dic_Altas = get_dict_dados(id_='921393660')
 
     emptyCityDictionaries = createEmptyCityInfoDictionary()
     dadosDeTodasAsCidades = []
-
+    
     # Transformar os dados em CSV em dados em JSON
     for municipio in dic_DadosPorMunicipio:
         # vou iterando. Para cada registro, atualizo o registro correspondente em
@@ -114,8 +121,9 @@ def fetchData():
                     "confirmed": municipio[uglifyHeaderItem('confirmed')], 
                     "deaths": municipio[uglifyHeaderItem('deaths')], 
                     "incidence": municipio[uglifyHeaderItem('incidence')],
-                    "population": municipio[uglifyHeaderItem('population')]
-            }
+                    "population": municipio[uglifyHeaderItem('population')],
+                    "discards": list(dic_Descartados)[0]['Descartados'], 
+                    "cured": list(dic_Altas)[0]['Altas Médicas']}
             break
         cep = municipio['CEP']
         for item in municipio.keys():
