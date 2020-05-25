@@ -378,11 +378,6 @@
 
 {% block maps %}
 <script>
-  var dataMapPiaui = [
-    {% for cidade in casos_por_cidades %}
-  ['{{cidade.idIBGE}}', {{ cidade.casos }}],
-    {% endfor %}
-  ];
   var dados_sesapi = JSON.parse('{{ dados_sesapi | safe }}');
 </script>
 

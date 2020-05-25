@@ -25,6 +25,30 @@ def soma_descartados_piaui(dados_sesapi):
             return cidade['discards']
 
 
+def soma_confSexoMale_piaui(dados_sesapi):
+    for cidade in list(reversed(json.loads(dados_sesapi))):
+        if cidade['city'] == 'PIAUÍ': 
+            return cidade['confMale']
+        
+
+def soma_confSexoFemi_piaui(dados_sesapi):
+    for cidade in list(reversed(json.loads(dados_sesapi))):
+        if cidade['city'] == 'PIAUÍ': 
+            return cidade['confFeminine']
+        
+        
+def soma_obtSexoMale_piaui(dados_sesapi):
+    for cidade in list(reversed(json.loads(dados_sesapi))):
+        if cidade['city'] == 'PIAUÍ': 
+            return cidade['obtMale']
+        
+        
+def soma_obtSexoFemi_piaui(dados_sesapi):
+    for cidade in list(reversed(json.loads(dados_sesapi))):
+        if cidade['city'] == 'PIAUÍ': 
+            return cidade['obtFeminine']
+
+
 def soma_altas_piaui(dados_sesapi):
     for cidade in list(reversed(json.loads(dados_sesapi))):
         if cidade['city'] == 'PIAUÍ': 
@@ -188,7 +212,7 @@ class Index(TemplateView):
         dados_sesapi = dados_sesapi.replace("'", "`")
         
         # CONTEXT
-        context['casos_por_cidades'] = queryset
+        #context['casos_por_cidades'] = queryset
         context['soma_obitos_por_cidade'] = soma_obitos_piaui(dados_sesapi)
         context['soma_casos_por_cidade'] = soma_casos_piaui(dados_sesapi)
         context['soma_altas_piaui'] = soma_altas_piaui(dados_sesapi)
@@ -203,6 +227,10 @@ class Index(TemplateView):
         context['new_deaths_for_state'] = new_deaths_for_state(data_new_confirmed)
         context['deaths_for_state'] = deaths_for_state(data_new_confirmed)
         context['comorbidades'] = registros_comorbidades()
+        context['confMale'] = soma_confSexoMale_piaui(dados_sesapi)
+        context['confFeminine'] = soma_confSexoFemi_piaui(dados_sesapi)
+        context['obtMale'] = soma_obtSexoMale_piaui(dados_sesapi)
+        context['obtFeminine'] = soma_obtSexoFemi_piaui(dados_sesapi)
         context['dados_sesapi'] = dados_sesapi
         context['atualizado'] = atualizado
         return context

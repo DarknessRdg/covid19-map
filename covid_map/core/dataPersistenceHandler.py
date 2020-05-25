@@ -124,6 +124,8 @@ def fetchData():
     cabecalhoDaTabelaMunicipios, dic_DadosPorMunicipio = get_dict_dados(id_='532454257')
     cabecalhoDaTabelaDescartados, dic_Descartados = get_dict_dados(id_='1183637221')
     cabecalhoDaTabelaAltas, dic_Altas = get_dict_dados(id_='921393660')
+    cabecalhoDaTabelaConfSexo, dic_ConfSexo = get_dict_dados(id_='0')
+    cabecalhoDaTabelaObtSexo, dic_ObtSexo = get_dict_dados(id_='953543508')
 
     emptyCityDictionaries = createEmptyCityInfoDictionary()
     dadosDeTodasAsCidades = []
@@ -139,7 +141,11 @@ def fetchData():
                     "incidence": municipio[uglifyHeaderItem('incidence')],
                     "population": municipio[uglifyHeaderItem('population')],
                     "discards": list(dic_Descartados)[0]['Descartados'], 
-                    "cured": list(dic_Altas)[0]['Altas Médicas']}
+                    "cured": list(dic_Altas)[0]['Altas Médicas'],
+                    "confMale": list(dic_ConfSexo)[0]['Quantidade'],
+                    "confFeminine": list(dic_ConfSexo)[1]['Quantidade'],
+                    "obtMale": list(dic_ObtSexo)[0]['Quantidade'],
+                    "obtFeminine": list(dic_ObtSexo)[1]['Quantidade']}
             break
         cep = municipio['CEP']
         for item in municipio.keys():
