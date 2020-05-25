@@ -12,6 +12,8 @@ import json
 import os
 from datetime import date as dt
 from .cepHashMap import cepHashMap
+from unicodedata import normalize
+import difflib
 ##############################
 # INSERT PATH DIR
 ###
@@ -22,6 +24,20 @@ data_path = os.path.join(script_path, "data")
 ###############################
 # INSERT CODE AREA (IBGE)
 ###
+
+def padronizar_cidade(txt):
+    return normalize('NFKD', txt).encode('ASCII', 'ignore').decode('ASCII').lower()
+
+
+def compara_cidades(*args):
+    cidade1, cidade2 = map(padronizar_cidade, args)
+
+    min_percent_equal = 95
+    diff = difflib.SequenceMatcher(None, cidade1, cidade2)
+    percent_equal = round(diff.ratio(), 5) * 100
+
+    return percent_equal >= min_percent_equal
+
 
 def get_dict_dados(id_, url='https://docs.google.com/spreadsheets/d/1b-GkDhhxJIwWcA6tk3z4eX58f-f1w2TA2f2XrI4XB1w/export?format=csv&gid='):
     # URL do Google Spreadsheet do Painel Epidemiológico da Covid-19 - SESAPI
@@ -128,7 +144,13 @@ def fetchData():
         cep = municipio['CEP']
         for item in municipio.keys():
             if item in ['Confirmados', 'Óbitos', 'Incidência', 'População']:
-                emptyCityDictionaries.get(cep)[beautifyHeaderItem(item)] = municipio[item]
+                try:
+                    cepHashMap[cep]
+                    emptyCityDictionaries.get(cep)[beautifyHeaderItem(item)] = municipio[item]
+                except KeyError:
+                    for cep, cidade in zip(cepHashMap.keys(), cepHashMap.values()):
+                        if compara_cidades(cidade['nome'], municipio['Município']):
+                            emptyCityDictionaries.get(cep)[beautifyHeaderItem(item)] = municipio[item]                    
         
     for item in emptyCityDictionaries.values():
         dadosDeTodasAsCidades.append(item)
