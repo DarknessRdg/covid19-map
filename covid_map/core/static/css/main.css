@@ -270,8 +270,9 @@ footer.rodape {
 
 .botao-github {
   height: 100%;
-  width: 220px;
-  border-radius: 6px;
+  width: 250px;
+  border-top-left-radius: 6px;
+  border-bottom-right-radius: 6px;
   background-color: rgb(51, 51, 51, 0.9);
   color: var(--branco);
   text-decoration: none;
@@ -283,11 +284,15 @@ footer.rodape {
 }
 
 .conteudo-botao-github {
-  padding: 10px;
+  height: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+}
+
+.conteudo-botao-github p {
+  margin-left: 10px;
 }
 
 @media (max-width: 630px) {
