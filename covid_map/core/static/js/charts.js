@@ -299,3 +299,24 @@ var grafico_confSexo = new Chart(elemento_confSexo, {
         responsive: true,
     }
 });
+
+
+var elemento_obtSexo = document.getElementById('obtSexo').getContext('2d');
+
+var grafico_obtSexo = new Chart(elemento_obtSexo, {
+    type: 'pie',
+    data: {
+        labels: ['Masculino', 'Feminino'],
+        datasets: [{
+            label: 'Óbitos por sexo',
+            data: [obtMale, obtFeminine],
+            backgroundColor: [
+                '#2196f3',
+                '#e91e63'
+            ]
+        }]
+    },
+    options: {
+        responsive: true,
+    }
+});
