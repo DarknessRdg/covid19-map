@@ -129,7 +129,8 @@ def fetchData():
 
     emptyCityDictionaries = createEmptyCityInfoDictionary()
     dadosDeTodasAsCidades = []
-    
+    dic_ConfSexo = list(dic_ConfSexo)
+    dic_ObtSexo = list(dic_ObtSexo)
     # Transformar os dados em CSV em dados em JSON
     for municipio in dic_DadosPorMunicipio:
         # vou iterando. Para cada registro, atualizo o registro correspondente em
@@ -142,10 +143,10 @@ def fetchData():
                     "population": municipio[uglifyHeaderItem('population')],
                     "discards": list(dic_Descartados)[0]['Descartados'], 
                     "cured": list(dic_Altas)[0]['Altas Médicas'],
-                    "confMale": list(dic_ConfSexo)[0]['Quantidade'],
-                    "confFeminine": list(dic_ConfSexo)[1]['Quantidade'],
-                    "obtMale": list(dic_ObtSexo)[0]['Quantidade'],
-                    "obtFeminine": list(dic_ObtSexo)[1]['Quantidade']}
+                    "confMale": dic_ConfSexo[0]['Quantidade'],
+                    "confFeminine": dic_ConfSexo[1]['Quantidade'],
+                    "obtMale": dic_ObtSexo[0]['Quantidade'],
+                    "obtFeminine": dic_ObtSexo[1]['Quantidade']}
             break
         cep = municipio['CEP']
         for item in municipio.keys():
