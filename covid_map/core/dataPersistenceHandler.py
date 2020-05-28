@@ -126,6 +126,7 @@ def fetchData():
     cabecalhoDaTabelaAltas, dic_Altas = get_dict_dados(id_='921393660')
     cabecalhoDaTabelaConfSexo, dic_ConfSexo = get_dict_dados(id_='0')
     cabecalhoDaTabelaObtSexo, dic_ObtSexo = get_dict_dados(id_='953543508')
+    cabecalhoDaTabelafaixaEtaria, dic_faixaEtaria = get_dict_dados(id_='1402178422')
 
     emptyCityDictionaries = createEmptyCityInfoDictionary()
     dadosDeTodasAsCidades = []
@@ -158,6 +159,17 @@ def fetchData():
                     for cep, cidade in zip(cepHashMap.keys(), cepHashMap.values()):
                         if compara_cidades(cidade['nome'], municipio['Município']):
                             emptyCityDictionaries.get(cep)[beautifyHeaderItem(item)] = municipio[item]                    
+    
+    faixaEtaria = {}
+    for item in dic_faixaEtaria:
+        if item['Faixa Etária'] == 'TOTAL': break
+        faixaEtaria[item['Faixa Etária']] = {
+            'confirmados': item['Confirmados'],
+            'percentualConf': item['Percentual C.'],
+            'obitos': item['Óbitos'],
+            'percentualObt': item['Percentual O.']
+        }
+    piaui['faixaEtaria'] = faixaEtaria
         
     for item in emptyCityDictionaries.values():
         dadosDeTodasAsCidades.append(item)
